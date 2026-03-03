@@ -31,7 +31,7 @@ html, body {
 }
 .bg-animation1 {
   position: fixed;
-  top: 50%;
+  top: 0%;
   left: 100%;
   transform: translate(-50%, -50%);
   width: 600px;
@@ -45,7 +45,7 @@ html, body {
 }
 .bg-animation2 {
   position: fixed;
-  top: 50%;
+  top: 0%;
   left: 0%;
   transform: translate(-50%, -50%);
   width: 600px;
@@ -57,7 +57,34 @@ html, body {
   pointer-events: none;
   animation: rotateClockwise 30s linear infinite;
 }
-
+.bg-animation3 {
+  position: fixed;
+  top: 100%;
+  left: 0%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  border: 2px dashed rgba(56, 189, 248, 0.2);
+  background: radial-gradient(circle, rgba(138, 43, 226, 0.1) 0%, transparent 70%);
+  z-index: 1;
+  pointer-events: none;
+  animation: rotateClockwise 30s linear infinite;
+}
+.bg-animation4 {
+  position: fixed;
+  top: 100%;
+  left: 100%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  border: 2px dashed rgba(56, 189, 248, 0.2);
+  background: radial-gradient(circle, rgba(138, 43, 226, 0.1) 0%, transparent 70%);
+  z-index: 1;
+  pointer-events: none;
+  animation: rotateClockwise 30s linear infinite;
+}
 .bg-animation::before {
   content: '';
   position: absolute;
@@ -81,6 +108,28 @@ html, body {
   border: 1px solid rgba(125, 211, 252, 0.1);
 }
 .bg-animation2::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 110%;
+  height: 110%;
+  border-radius: 50%;
+  border: 1px solid rgba(125, 211, 252, 0.1);
+}
+.bg-animation3::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 110%;
+  height: 110%;
+  border-radius: 50%;
+  border: 1px solid rgba(125, 211, 252, 0.1);
+}
+.bg-animation4::before {
   content: '';
   position: absolute;
   top: 50%;
@@ -182,6 +231,7 @@ html, body {
   color: #cbd5e1;
   margin-bottom: 2.5rem;
 }
+
 
 .hero-btns {
   display: flex;
