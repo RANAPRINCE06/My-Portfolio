@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
     <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -36,7 +37,7 @@
         <p>I am a passionate software engineering student who loves building efficient, scalable, and user-friendly applications. I enjoy solving problems using data structures, algorithms, and modern web technologies.</p>
         <div class="hero-btns">
             <a href="#projects" class="btn primary">View Projects</a>
-            <a href="file:///C:/Users/Prince/Downloads/PrinceRana_SDEIntern_.pdf" class="btn secondary">Download Resume</a>
+            <a href="https://drive.google.com/file/d/1DHnDQO2bxOzOrXtnM3FL8peH4Rg7DzlG/view?usp=sharing" target="_blank" class="btn secondary">View My Resume</a>
             <a href="#contact" class="btn outline">Contact Me</a>
         </div>
     </div>
@@ -431,13 +432,13 @@ I am looking for opportunities where I can apply my AI expertise and software en
         <div class="contact-form-container">
             <form class="contact-form">
                 <div class="form-group">
-                    <input type="text" placeholder="Your Name" required>
+                    <input type="text" name="user_name" placeholder="Your Name" required>
                 </div>
                 <div class="form-group">
-                    <input type="email" placeholder="Your Email" required>
+                    <input type="email" name="user_email" placeholder="Your Email" required>
                 </div>
                 <div class="form-group">
-                    <textarea placeholder="Your Message" rows="5" required></textarea>
+                    <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
                 </div>
                 <button type="submit" class="btn primary form-btn">Send Message</button>
             </form>
@@ -449,7 +450,6 @@ I am looking for opportunities where I can apply my AI expertise and software en
     <p>&copy; 2026 Prince Rana | Specialized in Artificial Intelligence</p>
 </footer>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>
-
-
