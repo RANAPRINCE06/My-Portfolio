@@ -39,3 +39,8 @@ Thumbs.db
 .jetro/
 .vscode/
 .idea/
+.mcp.json
+.windsurfrules
+AGENT.md
+CLAUDE.md
+.github/copilot-instructions.md

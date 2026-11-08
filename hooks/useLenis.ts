@@ -3,18 +3,43 @@
 import { useEffect, useRef } from 'react';
 import Lenis from 'lenis';
 import { synchronizeLenisAndGsap } from '@/lib/gsap';
+import { updateScrollState } from '@/lib/scroll-bridge';
 import { useReducedMotion } from './useReducedMotion';
 
+/**
+ * Custom hook managing Lenis smooth scroll lifecycle,
+ * GSAP ticker synchronization, and the 3D WebGL scroll bridge.
+ */
 export function useLenis() {
   const lenisRef = useRef<Lenis | null>(null);
   const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
-    // If the user prefers reduced motion, do not initialize smooth inertia scroll
-    if (prefersReducedMotion || typeof window === 'undefined') {
-      return;
+    if (typeof window === 'undefined') return;
+
+    // Fallback native scroll listener (also active if reduced motion is preferred)
+    const handleNativeScroll = () => {
+      const scrollY = window.scrollY || window.pageYOffset;
+      const maxScroll = Math.max(
+        document.documentElement.scrollHeight - window.innerHeight,
+        1
+      );
+      updateScrollState({
+        currentY: scrollY,
+        progress: scrollY / maxScroll,
+        velocity: 0,
+      });
+    };
+
+    // If reduced motion is preferred, use native passive scroll listener without smooth inertia
+    if (prefersReducedMotion) {
+      window.addEventListener('scroll', handleNativeScroll, { passive: true });
+      return () => {
+        window.removeEventListener('scroll', handleNativeScroll);
+      };
     }
 
+    // Initialize Lenis smooth scroll
     const lenis = new Lenis({
       duration: 1.1,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -25,9 +50,31 @@ export function useLenis() {
     });
 
     lenisRef.current = lenis;
+
+    // Bridge Lenis scroll events to 3D scene store
+    const handleLenisScroll = (e: {
+      scroll: number;
+      limit: number;
+      velocity: number;
+    }) => {
+      const progress = e.limit > 0 ? e.scroll / e.limit : 0;
+      updateScrollState({
+        currentY: e.scroll,
+        progress,
+        velocity: e.velocity,
+      });
+    };
+
+    lenis.on('scroll', handleLenisScroll);
+
+    // Synchronize Lenis with GSAP's central RAF ticker
     const cleanupSync = synchronizeLenisAndGsap(lenis);
 
+    // Initial sync
+    handleNativeScroll();
+
     return () => {
+      lenis.off('scroll', handleLenisScroll);
       cleanupSync();
       lenis.destroy();
       lenisRef.current = null;
@@ -36,4 +83,3 @@ export function useLenis() {
 
   return lenisRef;
 }
-

@@ -4,6 +4,7 @@ import { env } from '@/lib/env';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { SceneContainer } from '@/components/3d/SceneContainer';
+import { SmoothScrollProvider } from '@/components/providers/SmoothScrollProvider';
 import './globals.css';
 
 const inter = Inter({
@@ -101,10 +102,12 @@ export default function RootLayout({
         />
       </head>
       <body className="font-body bg-background-primary text-text-primary antialiased selection:bg-accent-cyan/30 selection:text-text-primary">
-        <SceneContainer />
-        <Navbar />
-        <main className="relative z-content min-h-screen pt-28 pb-20">{children}</main>
-        <Footer />
+        <SmoothScrollProvider>
+          <SceneContainer />
+          <Navbar />
+          <main className="relative z-content min-h-screen pt-28 pb-20">{children}</main>
+          <Footer />
+        </SmoothScrollProvider>
       </body>
     </html>
   );
