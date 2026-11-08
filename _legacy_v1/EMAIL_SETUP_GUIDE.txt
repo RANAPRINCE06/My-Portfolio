@@ -1,0 +1,71 @@
+EMAIL SETUP GUIDE FOR CONTACT FORM
+===================================
+
+Follow these steps to receive emails from your contact form:
+
+STEP 1: Create EmailJS Account
+-------------------------------
+1. Go to https://www.emailjs.com/
+2. Click "Sign Up" and create a free account
+3. Verify your email address
+
+STEP 2: Add Email Service
+--------------------------
+1. After logging in, go to "Email Services" in the dashboard
+2. Click "Add New Service"
+3. Choose your email provider (Gmail recommended)
+4. Connect your email account (rana.prince1806@gmail.com)
+5. Copy the SERVICE ID (e.g., "service_abc123")
+
+STEP 3: Create Email Template
+------------------------------
+1. Go to "Email Templates" in the dashboard
+2. Click "Create New Template"
+3. Use this template content:
+
+   Subject: New Contact Form Message from {{user_name}}
+   
+   Body:
+   You have received a new message from your portfolio contact form.
+   
+   Name: {{user_name}}
+   Email: {{user_email}}
+   
+   Message:
+   {{message}}
+
+4. Save the template
+5. Copy the TEMPLATE ID (e.g., "template_xyz789")
+
+STEP 4: Get Public Key
+-----------------------
+1. Go to "Account" > "General"
+2. Find your PUBLIC KEY (e.g., "abcXYZ123456")
+
+STEP 5: Update script.js
+-------------------------
+Open script.js and replace these placeholders:
+
+Line 2: Replace 'YOUR_PUBLIC_KEY' with your actual public key
+Line 17: Replace 'YOUR_SERVICE_ID' with your service ID
+Line 17: Replace 'YOUR_TEMPLATE_ID' with your template ID
+
+Example:
+emailjs.init('abcXYZ123456');
+emailjs.sendForm('service_abc123', 'template_xyz789', contactForm)
+
+STEP 6: Test
+------------
+1. Open your portfolio website
+2. Fill out the contact form
+3. Click "Send Message"
+4. Check your email inbox (rana.prince1806@gmail.com)
+
+TROUBLESHOOTING
+---------------
+- If emails don't arrive, check your EmailJS dashboard for error logs
+- Make sure your email service is properly connected
+- Check spam folder
+- Free plan allows 200 emails/month
+
+That's it! Your contact form will now send emails directly to your inbox.
