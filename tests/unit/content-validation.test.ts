@@ -39,11 +39,15 @@ describe('Phase 2.2 Content Validation & Synchronization Suite', () => {
     expect(qskill).toBeDefined();
     expect(qskill?.role).toBe('Frontend Developer Intern');
     expect(qskill?.category).toBe('Professional Internship');
+    expect(qskill?.startDate).toBe('June 2026');
+    expect(qskill?.endDate).toBe('July 2026');
     expect(() => ExperienceSchema.parse(qskill)).not.toThrow();
 
     expect(codec).toBeDefined();
     expect(codec?.role).toBe('AI Intern');
     expect(codec?.category).toBe('Professional Internship');
+    expect(codec?.startDate).toBe('June 2026');
+    expect(codec?.endDate).toBe('July 2026');
     expect(() => ExperienceSchema.parse(codec)).not.toThrow();
 
     expect(virtualJobSimulations.length).toBe(6);
@@ -54,13 +58,13 @@ describe('Phase 2.2 Content Validation & Synchronization Suite', () => {
     }
   });
 
-  it('validates education credentials match Parul University B.Tech AI profile with verified 7.95 CGPA', () => {
+  it('validates education credentials match Parul University B.Tech AI profile with verified 7.96 CGPA', () => {
     const edu = educationList[0];
     expect(() => EducationSchema.parse(edu)).not.toThrow();
     expect(edu.institution).toBe('Parul University');
     expect(edu.startYear).toBe(2024);
     expect(edu.endYear).toBe(2028);
-    expect(edu.cgpa).toBe('7.95');
+    expect(edu.cgpa).toBe('7.96');
     expect(edu.verificationStatus).toBe('verified');
   });
 

@@ -86,7 +86,7 @@ export default function HomePage() {
               B.Tech CSE (AI)
             </div>
             <p className="font-mono text-xs text-text-secondary mt-1">
-              Parul University &bull; 2024 &ndash; 2028 &bull; CGPA 7.95
+              Parul University &bull; 2024 &ndash; 2028 &bull; CGPA 7.96
             </p>
           </div>
         </BentoCard>

@@ -9,7 +9,7 @@ export const educationList: Education[] = [
     specialization: 'Artificial Intelligence',
     startYear: 2024,
     endYear: 2028,
-    cgpa: '7.95',
+    cgpa: '7.96',
     coursework: [
       'Data Structures & Algorithms',
       'Object-Oriented Programming (Java / C++)',
