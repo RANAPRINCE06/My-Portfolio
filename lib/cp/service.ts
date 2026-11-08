@@ -22,9 +22,8 @@ export class CompetitiveProgrammingService {
   }
 
   /**
-   * Optionally queries the official Codeforces public REST API (codeforces.com/api/user.info)
-   * to enrich the Codeforces profile with live rating if reachable,
-   * otherwise cleanly falling back to the verified snapshot.
+   * Queries the official Codeforces public REST API (codeforces.com/api/user.info)
+   * and records the exact retrieval timestamp, or falls back to the verified baseline snapshot.
    */
   async getCodeforcesLiveOrSnapshot(handle: string = 'rana_prince.1806'): Promise<CompetitiveProgrammingProfile> {
     const snapshot = competitiveProgrammingProfiles.find((p) => p.platform === 'Codeforces')!;
@@ -43,13 +42,15 @@ export class CompetitiveProgrammingService {
         const json: CodeforcesUserResponse = await res.json();
         if (json.status === 'OK' && json.result && json.result.length > 0) {
           const user = json.result[0];
+          const nowIso = new Date().toISOString();
           return {
             ...snapshot,
             currentRating: user.rating ?? snapshot.currentRating,
             maxRating: user.maxRating ?? snapshot.maxRating,
             rankTitle: user.rank ? user.rank.charAt(0).toUpperCase() + user.rank.slice(1) : snapshot.rankTitle,
             dataSource: 'live-api',
-            lastUpdated: new Date().toISOString().split('T')[0],
+            lastUpdated: nowIso.split('T')[0],
+            retrievedAt: nowIso,
           };
         }
       }
@@ -62,4 +63,3 @@ export class CompetitiveProgrammingService {
 }
 
 export const cpService = new CompetitiveProgrammingService();
-

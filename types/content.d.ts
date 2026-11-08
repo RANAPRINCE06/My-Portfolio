@@ -42,7 +42,7 @@ export interface Education {
   specialization: string;
   startYear: number;
   endYear: number;
-  cgpa?: string;
+  cgpa: string;
   coursework: string[];
   verificationStatus: VerificationStatus;
 }
@@ -53,6 +53,7 @@ export interface Experience {
   company: string;
   companyUrl?: string;
   employmentType: 'Full-time' | 'Internship' | 'Virtual Simulation' | 'Apprenticeship';
+  category: 'Professional Internship' | 'Virtual Job Simulation';
   location: string;
   startDate: string;
   endDate: string;
@@ -161,6 +162,7 @@ export interface CompetitiveProgrammingProfile {
   globalContestsParticipated?: number;
   dataSource: 'live-api' | 'verified-snapshot';
   lastUpdated: string;
+  retrievedAt?: string;
   verificationStatus: VerificationStatus;
 }
 

@@ -1,6 +1,6 @@
 import { personalProfile } from './profile';
 import { educationList } from './education';
-import { experienceList } from './experience';
+import { experienceList, professionalInternships, virtualJobSimulations } from './experience';
 import { projectList } from './projects';
 import { technicalSkillsList } from './skills';
 import { certificationList } from './certifications';
@@ -26,6 +26,8 @@ export {
   personalProfile,
   educationList,
   experienceList,
+  professionalInternships,
+  virtualJobSimulations,
   projectList,
   technicalSkillsList,
   certificationList,
@@ -46,7 +48,7 @@ export function validateAllContent(): { valid: boolean; summary: Record<string, 
   // 2. Education
   educationList.forEach((edu) => EducationSchema.parse(edu));
 
-  // 3. Experience
+  // 3. Experience (Both Professional Internships & Virtual Simulations)
   experienceList.forEach((exp) => ExperienceSchema.parse(exp));
 
   // 4. Projects
@@ -77,7 +79,9 @@ export function validateAllContent(): { valid: boolean; summary: Record<string, 
     summary: {
       profile: 1,
       education: educationList.length,
-      experience: experienceList.length,
+      professionalInternships: professionalInternships.length,
+      virtualSimulations: virtualJobSimulations.length,
+      totalExperience: experienceList.length,
       projects: projectList.length,
       skills: technicalSkillsList.length,
       certifications: certificationList.length,
@@ -88,4 +92,3 @@ export function validateAllContent(): { valid: boolean; summary: Record<string, 
     },
   };
 }
-

@@ -44,7 +44,7 @@ export const EducationSchema = z.object({
   specialization: z.string().min(1),
   startYear: z.number().int().min(2000),
   endYear: z.number().int().min(2000),
-  cgpa: z.string().optional(),
+  cgpa: z.string().min(1),
   coursework: z.array(z.string()).min(1),
   verificationStatus: VerificationStatusSchema,
 });
@@ -55,6 +55,7 @@ export const ExperienceSchema = z.object({
   company: z.string().min(1),
   companyUrl: z.string().url().optional(),
   employmentType: z.enum(['Full-time', 'Internship', 'Virtual Simulation', 'Apprenticeship']),
+  category: z.enum(['Professional Internship', 'Virtual Job Simulation']),
   location: z.string().min(1),
   startDate: z.string().min(1),
   endDate: z.string().min(1),
@@ -169,6 +170,6 @@ export const CompetitiveProgrammingProfileSchema = z.object({
   globalContestsParticipated: z.number().int().nonnegative().optional(),
   dataSource: z.enum(['live-api', 'verified-snapshot']),
   lastUpdated: z.string().min(1),
+  retrievedAt: z.string().optional(),
   verificationStatus: VerificationStatusSchema,
 });
-

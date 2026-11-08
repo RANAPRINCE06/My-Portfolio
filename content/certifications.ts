@@ -1,6 +1,81 @@
 import { Certification } from '@/types/content';
 
 export const certificationList: Certification[] = [
+  // Academic & Industry Technical Certifications (from verified resume)
+  {
+    id: 'cert-oci-foundations',
+    title: 'Oracle Cloud Infrastructure Foundations Associate',
+    issuer: 'Oracle',
+    issuerCategory: 'Cloud & Enterprise',
+    issueDate: '2025',
+    skillsVerified: ['Cloud Infrastructure', 'OCI Architecture', 'Compute & Networking'],
+    verificationStatus: 'verified',
+  },
+  {
+    id: 'cert-oci-ai-foundations',
+    title: 'Oracle Cloud Infrastructure AI Foundations Associate',
+    issuer: 'Oracle',
+    issuerCategory: 'Cloud & Enterprise',
+    issueDate: '2025',
+    skillsVerified: ['Artificial Intelligence', 'OCI AI Services', 'Machine Learning Models'],
+    verificationStatus: 'verified',
+  },
+  {
+    id: 'cert-ibm-python-specialist',
+    title: 'IBM Python Specialist',
+    issuer: 'IBM',
+    issuerCategory: 'Technology',
+    issueDate: '2025',
+    skillsVerified: ['Python', 'Data Structures', 'Application Logic'],
+    verificationStatus: 'verified',
+  },
+  {
+    id: 'cert-gemini-certified',
+    title: 'Gemini Certified University Student',
+    issuer: 'Google',
+    issuerCategory: 'Technology',
+    issueDate: '2025',
+    skillsVerified: ['Generative AI', 'Gemini Models', 'Prompt Engineering'],
+    verificationStatus: 'verified',
+  },
+  {
+    id: 'cert-msft-ml-concepts',
+    title: 'Introduction to Machine Learning Concepts',
+    issuer: 'Microsoft',
+    issuerCategory: 'Technology',
+    issueDate: '2025',
+    skillsVerified: ['Machine Learning', 'Model Evaluation', 'Supervised Learning'],
+    verificationStatus: 'verified',
+  },
+  {
+    id: 'cert-pearson-js-specialist',
+    title: 'JavaScript IT Specialist',
+    issuer: 'Pearson',
+    issuerCategory: 'Academic',
+    issueDate: '2025',
+    skillsVerified: ['JavaScript', 'DOM Manipulation', 'Asynchronous Programming'],
+    verificationStatus: 'verified',
+  },
+  {
+    id: 'cert-infosys-landing-page',
+    title: 'Project on HTML-CSS: Landing Page Design',
+    issuer: 'Infosys',
+    issuerCategory: 'Technology',
+    issueDate: '2025',
+    skillsVerified: ['HTML5', 'CSS3', 'Responsive Web Design'],
+    verificationStatus: 'verified',
+  },
+  {
+    id: 'cert-skillsoft-genai',
+    title: 'Generative AI Foundations',
+    issuer: 'Skillsoft',
+    issuerCategory: 'Technology',
+    issueDate: '2025',
+    skillsVerified: ['Generative AI', 'Transformer Concepts', 'AI Governance'],
+    verificationStatus: 'verified',
+  },
+
+  // Virtual Job Simulation Verified Credentials (The Forage)
   {
     id: 'cert-wells-fargo-swe',
     title: 'Software Engineering Job Simulation',
@@ -88,4 +163,3 @@ export const certificationList: Certification[] = [
     verificationStatus: 'verified',
   },
 ];
-
