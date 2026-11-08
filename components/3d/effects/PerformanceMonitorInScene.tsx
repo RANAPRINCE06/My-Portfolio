@@ -43,3 +43,4 @@ export const PerformanceMonitorInScene: React.FC<PerformanceMonitorInSceneProps>
 
   return null;
 };
+
