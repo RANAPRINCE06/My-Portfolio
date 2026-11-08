@@ -209,3 +209,4 @@ export const technicalSkillsList: TechnicalSkill[] = [
     highlight: false,
   },
 ];
+

@@ -65,3 +65,4 @@ export const socialLinks: SocialProfile[] = [
     isPrimary: true,
   },
 ];
+

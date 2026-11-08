@@ -22,3 +22,4 @@ export const educationList: Education[] = [
     verificationStatus: 'verified',
   },
 ];
+

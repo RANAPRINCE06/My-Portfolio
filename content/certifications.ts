@@ -88,3 +88,4 @@ export const certificationList: Certification[] = [
     verificationStatus: 'verified',
   },
 ];
+

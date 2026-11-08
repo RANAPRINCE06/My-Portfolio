@@ -4,11 +4,11 @@ import { CompetitiveProgrammingProfileSchema } from '@/lib/validation/content-sc
 import { cpService } from '@/lib/cp/service';
 
 describe('Competitive Programming Architecture Suite', () => {
-  it('validates all verified snapshots match the schema', () => {
+  it('validates all verified profiles match the schema', () => {
     for (const profile of competitiveProgrammingProfiles) {
       expect(() => CompetitiveProgrammingProfileSchema.parse(profile)).not.toThrow();
       expect(profile.verificationStatus).toBe('verified');
-      expect(profile.dataSource).toBe('verified-snapshot');
+      expect(['live-api', 'verified-snapshot']).toContain(profile.dataSource);
       expect(profile.lastUpdated).toBeDefined();
     }
   });
@@ -17,7 +17,8 @@ describe('Competitive Programming Architecture Suite', () => {
     const cf = competitiveProgrammingProfiles.find((p) => p.platform === 'Codeforces');
     expect(cf).toBeDefined();
     expect(cf?.handle).toBe('rana_prince.1806');
-    expect(cf?.currentRating).toBe(1461);
+    expect(cf?.currentRating).toBe(1498);
+    expect(cf?.maxRating).toBe(1565);
     expect(cf?.rankTitle).toBe('Specialist');
 
     const cc = competitiveProgrammingProfiles.find((p) => p.platform === 'CodeChef');
@@ -32,11 +33,11 @@ describe('Competitive Programming Architecture Suite', () => {
     expect(lc?.problemsSolved).toBe(400);
   });
 
-  it('returns verified snapshot fallback on network failure or timeout', async () => {
-    // Calling service with a non-existent or unreachable handle should cleanly return the snapshot
+  it('returns verified fallback on network failure or invalid handle query', async () => {
     const profile = await cpService.getCodeforcesLiveOrSnapshot('invalid_handle_test_404_mock');
     expect(profile.platform).toBe('Codeforces');
-    expect(profile.currentRating).toBe(1461);
+    expect(profile.currentRating).toBe(1498);
+    expect(profile.maxRating).toBe(1565);
     expect(profile.rankTitle).toBe('Specialist');
   });
 });

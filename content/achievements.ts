@@ -3,13 +3,13 @@ import { Achievement } from '@/types/content';
 export const achievementList: Achievement[] = [
   {
     id: 'ach-codeforces-specialist',
-    title: 'Codeforces Specialist (Rating: 1461)',
+    title: 'Codeforces Specialist (Max Rating: 1565)',
     category: 'Competitive Programming',
     organization: 'Codeforces',
-    metric: '1461 Max Rating',
+    metric: '1565 Max Rating (1498 Current)',
     description:
       'Demonstrated advanced algorithmic proficiency, dynamic programming, graph traversal, and mathematical modeling in global rated rounds.',
-    date: '2025',
+    date: '2026',
     proofUrl: 'https://codeforces.com/profile/rana_prince.1806',
     featured: true,
     verificationStatus: 'verified',

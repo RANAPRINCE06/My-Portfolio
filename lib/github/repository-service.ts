@@ -17,7 +17,7 @@ export const REPOSITORY_CURATION_MAP: Record<string, CuratedRepoConfig> = {
     isFeatured: true,
     isHidden: false,
     customDescription:
-      'AI-powered road safety intelligence platform detecting hazards, predicting risk indices, and accelerating municipal repair workflows (IIT Madras CoERS Hackathon).',
+      'AI-powered road safety intelligence platform detecting hazards, predicting risk indices, and accelerating municipal repair workflows with real-time Socket.IO telemetry (IIT Madras CoERS Hackathon).',
     category: 'AI & Machine Learning',
     displayOrder: 1,
   },
@@ -26,44 +26,44 @@ export const REPOSITORY_CURATION_MAP: Record<string, CuratedRepoConfig> = {
     isFeatured: true,
     isHidden: false,
     customDescription:
-      'Semantic NLP engine using BERT, Sentence Transformers, and spaCy NER to evaluate ATS compatibility and skill gap analysis.',
+      'Semantic NLP engine using Sentence-BERT (all-MiniLM-L6-v2), spaCy NER, and TF-IDF to evaluate ATS compatibility and skill gap analysis.',
     category: 'AI & Machine Learning',
     displayOrder: 2,
-  },
-  'scalecart-microservices': {
-    repoName: 'scalecart-microservices',
-    isFeatured: true,
-    isHidden: false,
-    customDescription:
-      'Distributed E-Commerce Microservices Platform built with Java 21, Spring Boot, Kafka messaging, PostgreSQL, and Redis caching.',
-    category: 'Distributed Systems & Backend',
-    displayOrder: 3,
   },
   RescueAI: {
     repoName: 'RescueAI',
     isFeatured: true,
     isHidden: false,
     customDescription:
-      'Disaster Response & Decision Intelligence Command Center with grounded RAG embedding pipelines.',
+      'Disaster Response & Decision Intelligence Command Center with Google Gemini AI and Google Maps geospatial incident tracking.',
     category: 'AI & Machine Learning',
-    displayOrder: 4,
+    displayOrder: 3,
   },
   'Web-Project': {
     repoName: 'Web-Project',
     isFeatured: false,
     isHidden: false,
     customDescription:
-      'Full-Stack Transportation Management System with 15+ REST APIs, RBAC authorization, and containerized Docker setup.',
+      'Full-Stack Transportation Management System with 15+ Express REST APIs, JWT authentication, SQLite3 persistence, and Helmet security.',
     category: 'Full-Stack Web',
-    displayOrder: 5,
+    displayOrder: 4,
   },
   StadiumX: {
     repoName: 'StadiumX',
     isFeatured: false,
     isHidden: false,
     customDescription:
-      'Event ticketing and stadium venue management platform built with Next.js and TypeScript.',
+      'Interactive venue seating and event management prototype built with React, Vite, Firebase, and Google GenAI.',
     category: 'Full-Stack Web',
+    displayOrder: 5,
+  },
+  'scalecart-microservices': {
+    repoName: 'scalecart-microservices',
+    isFeatured: false,
+    isHidden: false,
+    customDescription:
+      'Distributed E-Commerce Microservices architectural study in Java 21 & Spring Boot (extending open-source base architecture by Ashifur Nahid).',
+    category: 'Distributed Systems & Backend',
     displayOrder: 6,
   },
   // Explicitly hidden repositories (experiments, tutorials, homework assignments)
@@ -130,7 +130,6 @@ export class RepositoryService {
   }> {
     const { data: rawRepos } = await githubClient.getRepositories();
 
-    // If API failed or returned empty (e.g. rate limit, offline build), use verified fallback
     if (!rawRepos || rawRepos.length === 0) {
       const fallback = this.getLocalFallbackRepositories();
       return {
@@ -168,7 +167,6 @@ export class RepositoryService {
       });
     }
 
-    // Sort by displayOrder ascending, then stars descending, then update date
     processed.sort((a, b) => {
       if (a.displayOrder !== b.displayOrder) {
         return a.displayOrder - b.displayOrder;

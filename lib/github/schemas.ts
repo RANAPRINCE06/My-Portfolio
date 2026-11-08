@@ -42,3 +42,4 @@ export const GitHubUserApiSchema = z.object({
 });
 
 export type GitHubUserApi = z.infer<typeof GitHubUserApiSchema>;
+

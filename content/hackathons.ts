@@ -16,3 +16,4 @@ export const hackathonList: Hackathon[] = [
     verificationStatus: 'verified',
   },
 ];
+

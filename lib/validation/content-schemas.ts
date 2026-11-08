@@ -171,3 +171,4 @@ export const CompetitiveProgrammingProfileSchema = z.object({
   lastUpdated: z.string().min(1),
   verificationStatus: VerificationStatusSchema,
 });
+

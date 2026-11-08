@@ -21,3 +21,4 @@ export const personalProfile: PersonalProfile = {
   },
   socials: socialLinks,
 };
+

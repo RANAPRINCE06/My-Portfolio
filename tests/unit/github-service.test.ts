@@ -10,11 +10,11 @@ describe('GitHub Data Service & Curation Suite', () => {
       full_name: 'RANAPRINCE06/ROADWATCH-AI',
       description: 'Road safety platform',
       html_url: 'https://github.com/RANAPRINCE06/ROADWATCH-AI',
-      homepage: 'https://roadwatch.vercel.app',
+      homepage: null,
       stargazers_count: 5,
       forks_count: 1,
       language: 'TypeScript',
-      topics: ['nextjs', 'ai', 'computer-vision'],
+      topics: ['react', 'ai', 'socket-io'],
       archived: false,
       fork: false,
       updated_at: '2026-03-01T12:00:00Z',
@@ -47,6 +47,9 @@ describe('GitHub Data Service & Curation Suite', () => {
   it('correctly maps curated metadata and excludes hidden toy repositories', () => {
     expect(REPOSITORY_CURATION_MAP['ROADWATCH-AI'].isFeatured).toBe(true);
     expect(REPOSITORY_CURATION_MAP['ROADWATCH-AI'].isHidden).toBe(false);
+
+    expect(REPOSITORY_CURATION_MAP['scalecart-microservices'].isFeatured).toBe(false);
+    expect(REPOSITORY_CURATION_MAP['scalecart-microservices'].isHidden).toBe(false);
 
     expect(REPOSITORY_CURATION_MAP['C-tutorial'].isHidden).toBe(true);
     expect(REPOSITORY_CURATION_MAP['Birthday'].isHidden).toBe(true);
