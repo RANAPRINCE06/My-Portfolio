@@ -1,0 +1,68 @@
+'use client';
+
+import React, { Suspense } from 'react';
+import { Canvas } from '@react-three/fiber';
+import { SceneManager } from './SceneManager';
+import { ScenePerformanceConfig } from '@/types/scene';
+
+interface SceneCanvasProps {
+  config: ScenePerformanceConfig;
+  prefersReducedMotion?: boolean;
+}
+
+/**
+ * SceneCanvas encapsulates the WebGL Canvas lifecycle.
+ * Manages device-pixel-ratio scaling, power preferences, clear colors,
+ * and frameloop throttling when reduced motion is preferred.
+ */
+export const SceneCanvas: React.FC<SceneCanvasProps> = ({
+  config,
+  prefersReducedMotion = false,
+}) => {
+  return (
+    <div
+      className="absolute inset-0 h-full w-full pointer-events-none"
+      role="region"
+      aria-label="3D Ambient Scene"
+      aria-hidden="true"
+    >
+      <Canvas
+        gl={{
+          antialias: config.antialias,
+          alpha: true,
+          powerPreference: 'high-performance',
+          stencil: false,
+          depth: true,
+        }}
+        dpr={config.dpr}
+        camera={{
+          position: [0, 0, 6],
+          fov: config.targetFov,
+          near: 0.1,
+          far: 50,
+        }}
+        frameloop={prefersReducedMotion ? 'demand' : 'always'}
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          pointerEvents: 'none',
+        }}
+        onCreated={({ gl }) => {
+          // Set transparent clear color to allow deep CSS ambient gradients to blend cleanly
+          gl.setClearColor(0x05070d, 0);
+        }}
+      >
+        <Suspense fallback={null}>
+          <SceneManager
+            config={config}
+            prefersReducedMotion={prefersReducedMotion}
+          />
+        </Suspense>
+      </Canvas>
+    </div>
+  );
+};
+
