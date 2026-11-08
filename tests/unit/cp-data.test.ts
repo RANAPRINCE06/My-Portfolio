@@ -1,0 +1,42 @@
+import { describe, it, expect } from 'vitest';
+import { competitiveProgrammingProfiles } from '@/content/competitive-programming';
+import { CompetitiveProgrammingProfileSchema } from '@/lib/validation/content-schemas';
+import { cpService } from '@/lib/cp/service';
+
+describe('Competitive Programming Architecture Suite', () => {
+  it('validates all verified snapshots match the schema', () => {
+    for (const profile of competitiveProgrammingProfiles) {
+      expect(() => CompetitiveProgrammingProfileSchema.parse(profile)).not.toThrow();
+      expect(profile.verificationStatus).toBe('verified');
+      expect(profile.dataSource).toBe('verified-snapshot');
+      expect(profile.lastUpdated).toBeDefined();
+    }
+  });
+
+  it('contains authentic verified metrics for Codeforces, CodeChef, and LeetCode', () => {
+    const cf = competitiveProgrammingProfiles.find((p) => p.platform === 'Codeforces');
+    expect(cf).toBeDefined();
+    expect(cf?.handle).toBe('rana_prince.1806');
+    expect(cf?.currentRating).toBe(1461);
+    expect(cf?.rankTitle).toBe('Specialist');
+
+    const cc = competitiveProgrammingProfiles.find((p) => p.platform === 'CodeChef');
+    expect(cc).toBeDefined();
+    expect(cc?.handle).toBe('rana_prince_06');
+    expect(cc?.currentRating).toBe(1606);
+    expect(cc?.rankTitle).toBe('3★');
+
+    const lc = competitiveProgrammingProfiles.find((p) => p.platform === 'LeetCode');
+    expect(lc).toBeDefined();
+    expect(lc?.handle).toBe('RANA_PRINCE_06');
+    expect(lc?.problemsSolved).toBe(400);
+  });
+
+  it('returns verified snapshot fallback on network failure or timeout', async () => {
+    // Calling service with a non-existent or unreachable handle should cleanly return the snapshot
+    const profile = await cpService.getCodeforcesLiveOrSnapshot('invalid_handle_test_404_mock');
+    expect(profile.platform).toBe('Codeforces');
+    expect(profile.currentRating).toBe(1461);
+    expect(profile.rankTitle).toBe('Specialist');
+  });
+});
