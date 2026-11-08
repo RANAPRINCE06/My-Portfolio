@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState, useEffect, useCallback, Component, ErrorInfo } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, Component, ErrorInfo } from 'react';
 import dynamic from 'next/dynamic';
-import { usePerformanceProfile } from '@/hooks/usePerformanceProfile';
+import { usePerformanceProfile, getScenePerformanceConfig } from '@/hooks/usePerformanceProfile';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
+import { PerformanceTier } from '@/types/scene';
 import { StaticFallback } from './fallbacks/StaticFallback';
 
 // Dynamically import SceneCanvas with SSR disabled to guarantee zero hydration mismatch
@@ -58,11 +59,22 @@ interface SceneContainerProps {
 export const SceneContainer: React.FC<SceneContainerProps> = ({ children }) => {
   const profile = usePerformanceProfile();
   const prefersReducedMotion = useReducedMotion();
+  const [overrideTier, setOverrideTier] = useState<PerformanceTier | null>(null);
   const [contextLost, setContextLost] = useState<boolean>(false);
   const [isMounted, setIsMounted] = useState<boolean>(false);
 
   useEffect(() => {
     setIsMounted(true);
+  }, []);
+
+  const effectiveTier = overrideTier || profile.tier;
+  const activeConfig = useMemo(() => {
+    return getScenePerformanceConfig(effectiveTier);
+  }, [effectiveTier]);
+
+  const handleDowngrade = useCallback((newTier: PerformanceTier) => {
+    console.warn(`Sustained frame drop detected. Downgrading 3D scene tier to ${newTier}.`);
+    setOverrideTier(newTier);
   }, []);
 
   const handleContextLost = useCallback((event: Event) => {
@@ -92,7 +104,7 @@ export const SceneContainer: React.FC<SceneContainerProps> = ({ children }) => {
 
   // If not mounted (SSR/Hydration), or WebGL disabled/unsupported, or context lost:
   // Render high-performance static CSS backdrop with zero layout shift
-  if (!isMounted || profile.tier === 'fallback' || contextLost) {
+  if (!isMounted || activeConfig.tier === 'fallback' || contextLost) {
     return <StaticFallback />;
   }
 
@@ -104,8 +116,9 @@ export const SceneContainer: React.FC<SceneContainerProps> = ({ children }) => {
       <StaticFallback />
       <SceneErrorBoundary fallback={<StaticFallback />}>
         <SceneCanvas
-          config={profile}
+          config={activeConfig}
           prefersReducedMotion={prefersReducedMotion}
+          onDowngrade={handleDowngrade}
         />
       </SceneErrorBoundary>
       {children}

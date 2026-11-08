@@ -5,21 +5,25 @@ import { CameraRig } from './CameraRig';
 import { Environment } from './Environment';
 import { CyberCore } from './CyberCore';
 import { ParticleField } from './Particles';
-import { ScenePerformanceConfig } from '@/types/scene';
+import { PostProcessingEffects, PerformanceMonitorInScene } from './effects';
+import { ScenePerformanceConfig, PerformanceTier } from '@/types/scene';
 
 interface SceneManagerProps {
   config: ScenePerformanceConfig;
   prefersReducedMotion?: boolean;
+  onDowngrade?: (newTier: PerformanceTier) => void;
 }
 
 /**
  * SceneManager orchestrates the 3D visual composition inside the R3F Canvas.
- * Connects the camera rig, lighting environment, core geometry, and particle fields
- * according to the active performance profile.
+ * Connects camera kinematics, atmospheric lighting, custom GLSL CyberCore,
+ * kinetic particle constellation, real-time performance monitoring,
+ * and adaptive post-processing effects.
  */
 export const SceneManager: React.FC<SceneManagerProps> = ({
   config,
   prefersReducedMotion = false,
+  onDowngrade,
 }) => {
   return (
     <>
@@ -36,7 +40,15 @@ export const SceneManager: React.FC<SceneManagerProps> = ({
         config={config}
         prefersReducedMotion={prefersReducedMotion}
       />
+      <PerformanceMonitorInScene
+        currentTier={config.tier}
+        onDowngrade={onDowngrade}
+        disabled={prefersReducedMotion || config.tier === 'low'}
+      />
+      <PostProcessingEffects
+        config={config}
+        prefersReducedMotion={prefersReducedMotion}
+      />
     </>
   );
 };
-

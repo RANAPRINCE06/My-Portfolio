@@ -54,6 +54,31 @@ export function getScenePerformanceConfig(
         enablePostProcessing: true,
         enableInteractiveParallax: true,
         targetFov: 45,
+        postProcessing: {
+          enabled: true,
+          multisampling: 2,
+          bloom: {
+            enabled: true,
+            intensity: 0.9,
+            luminanceThreshold: 0.25,
+            luminanceSmoothing: 0.8,
+            mipmapBlur: true,
+          },
+          chromaticAberration: {
+            enabled: true,
+            offset: [0.0012, 0.0008],
+            radialModulation: true,
+          },
+          vignette: {
+            enabled: true,
+            offset: 0.28,
+            darkness: 0.42,
+          },
+          toneMapping: {
+            enabled: true,
+            mode: 6, // ACES_FILMIC
+          },
+        },
       };
     case 'balanced':
       return {
@@ -63,9 +88,34 @@ export function getScenePerformanceConfig(
         antialias: true,
         shadows: false,
         enhancedLighting: true,
-        enablePostProcessing: false,
+        enablePostProcessing: true,
         enableInteractiveParallax: true,
         targetFov: 50,
+        postProcessing: {
+          enabled: true,
+          multisampling: 0,
+          bloom: {
+            enabled: true,
+            intensity: 0.45,
+            luminanceThreshold: 0.3,
+            luminanceSmoothing: 0.8,
+            mipmapBlur: true,
+          },
+          chromaticAberration: {
+            enabled: true,
+            offset: [0.0006, 0.0004],
+            radialModulation: true,
+          },
+          vignette: {
+            enabled: true,
+            offset: 0.3,
+            darkness: 0.35,
+          },
+          toneMapping: {
+            enabled: true,
+            mode: 6, // ACES_FILMIC
+          },
+        },
       };
     case 'low':
       return {
@@ -78,6 +128,31 @@ export function getScenePerformanceConfig(
         enablePostProcessing: false,
         enableInteractiveParallax: false,
         targetFov: 55,
+        postProcessing: {
+          enabled: false,
+          multisampling: 0,
+          bloom: {
+            enabled: false,
+            intensity: 0,
+            luminanceThreshold: 1,
+            luminanceSmoothing: 0,
+            mipmapBlur: false,
+          },
+          chromaticAberration: {
+            enabled: false,
+            offset: [0, 0],
+            radialModulation: false,
+          },
+          vignette: {
+            enabled: false,
+            offset: 0,
+            darkness: 0,
+          },
+          toneMapping: {
+            enabled: false,
+            mode: 0,
+          },
+        },
       };
     case 'fallback':
     default:
@@ -91,6 +166,31 @@ export function getScenePerformanceConfig(
         enablePostProcessing: false,
         enableInteractiveParallax: false,
         targetFov: 45,
+        postProcessing: {
+          enabled: false,
+          multisampling: 0,
+          bloom: {
+            enabled: false,
+            intensity: 0,
+            luminanceThreshold: 1,
+            luminanceSmoothing: 0,
+            mipmapBlur: false,
+          },
+          chromaticAberration: {
+            enabled: false,
+            offset: [0, 0],
+            radialModulation: false,
+          },
+          vignette: {
+            enabled: false,
+            offset: 0,
+            darkness: 0,
+          },
+          toneMapping: {
+            enabled: false,
+            mode: 0,
+          },
+        },
       };
   }
 }

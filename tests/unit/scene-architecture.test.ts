@@ -144,7 +144,7 @@ describe('Phase 3.1 Adaptive 3D Scene Architecture Suite', () => {
       expect(config.dpr).toEqual([1, 1.5]);
       expect(config.antialias).toBe(true);
       expect(config.enhancedLighting).toBe(true);
-      expect(config.enablePostProcessing).toBe(false);
+      expect(config.enablePostProcessing).toBe(true);
       expect(config.enableInteractiveParallax).toBe(true);
       expect(config.targetFov).toBe(50);
     });

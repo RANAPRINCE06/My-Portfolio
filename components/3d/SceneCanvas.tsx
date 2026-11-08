@@ -3,21 +3,23 @@
 import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { SceneManager } from './SceneManager';
-import { ScenePerformanceConfig } from '@/types/scene';
+import { ScenePerformanceConfig, PerformanceTier } from '@/types/scene';
 
 interface SceneCanvasProps {
   config: ScenePerformanceConfig;
   prefersReducedMotion?: boolean;
+  onDowngrade?: (newTier: PerformanceTier) => void;
 }
 
 /**
  * SceneCanvas encapsulates the WebGL Canvas lifecycle.
  * Manages device-pixel-ratio scaling, power preferences, clear colors,
- * and frameloop throttling when reduced motion is preferred.
+ * frameloop throttling, and degradation cascades.
  */
 export const SceneCanvas: React.FC<SceneCanvasProps> = ({
   config,
   prefersReducedMotion = false,
+  onDowngrade,
 }) => {
   return (
     <div
@@ -59,10 +61,10 @@ export const SceneCanvas: React.FC<SceneCanvasProps> = ({
           <SceneManager
             config={config}
             prefersReducedMotion={prefersReducedMotion}
+            onDowngrade={onDowngrade}
           />
         </Suspense>
       </Canvas>
     </div>
   );
 };
-

@@ -6,4 +6,4 @@ export { Environment } from './Environment';
 export { CyberCore } from './CyberCore';
 export { ParticleField } from './Particles';
 export { StaticFallback } from './fallbacks/StaticFallback';
-
+export { PostProcessingEffects, PerformanceMonitorInScene } from './effects';
