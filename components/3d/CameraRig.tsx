@@ -15,7 +15,8 @@ const DEFAULT_CAMERA_CONFIG: CameraRigConfig = {
   maxOffsetX: 0.35,
   maxOffsetY: 0.2,
   smoothSpeed: 2.5,
-  basePosition: [0, 0, 6],
+  // Shift base position left so CyberCore appears framed on the right of the Hero
+  basePosition: [-1.0, 0, 5.8],
 };
 
 /**

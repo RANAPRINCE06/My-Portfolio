@@ -58,6 +58,28 @@ const config: Config = {
         modal: '50',
         toast: '60',
       },
+      animation: {
+        'spin-slow': 'spin 14s linear infinite',
+        'spin-reverse-slow': 'spin 20s linear infinite reverse',
+        'float': 'float 6s ease-in-out infinite',
+        'pulse-slow': 'pulse 4s ease-in-out infinite',
+        'pulse-glow': 'pulse-glow 3s ease-in-out infinite',
+        'scan': 'scan 4s linear infinite',
+      },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
+        'pulse-glow': {
+          '0%, 100%': { opacity: '0.3' },
+          '50%': { opacity: '0.9' },
+        },
+        scan: {
+          '0%': { transform: 'translateY(-100%)' },
+          '100%': { transform: 'translateY(100%)' },
+        },
+      },
     },
   },
   plugins: [],

@@ -12,6 +12,8 @@ interface SceneManagerProps {
   config: ScenePerformanceConfig;
   prefersReducedMotion?: boolean;
   onDowngrade?: (newTier: PerformanceTier) => void;
+  /** Optional world-space offset to shift CyberCore for Hero framing */
+  corePosition?: [number, number, number];
 }
 
 /**
@@ -24,6 +26,7 @@ export const SceneManager: React.FC<SceneManagerProps> = ({
   config,
   prefersReducedMotion = false,
   onDowngrade,
+  corePosition,
 }) => {
   return (
     <>
@@ -35,6 +38,7 @@ export const SceneManager: React.FC<SceneManagerProps> = ({
       <CyberCore
         config={config}
         prefersReducedMotion={prefersReducedMotion}
+        position={corePosition}
       />
       <ParticleField
         config={config}
