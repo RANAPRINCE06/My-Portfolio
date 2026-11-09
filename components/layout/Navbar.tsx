@@ -20,7 +20,7 @@ export const Navbar: React.FC = () => {
     <header className="fixed top-0 left-0 right-0 z-dock flex justify-center p-4 md:p-6">
       <nav
         aria-label="Main Navigation"
-        className="flex w-full max-w-5xl items-center justify-between rounded-2xl border border-border-subtle bg-background-glass/85 px-5 py-3 shadow-card-glass backdrop-blur-xl transition-all duration-300 hover:border-border-elevated"
+        className="flex w-full max-w-6xl items-center justify-between rounded-2xl border border-border-subtle bg-background-glass/85 px-5 py-3 shadow-card-glass backdrop-blur-xl transition-all duration-300 hover:border-border-elevated"
       >
         {/* Brand / Monogram */}
         <Link

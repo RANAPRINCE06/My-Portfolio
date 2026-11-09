@@ -6,7 +6,12 @@ import {
   BentoShowcase,
   ContactSection,
 } from '@/components/sections';
-import { projectList, competitiveProgrammingProfiles, educationList } from '@/content';
+import {
+  projectList,
+  competitiveProgrammingProfiles,
+  educationList,
+  professionalInternships,
+} from '@/content';
 
 describe('Phase 4 Homepage & Showcase Architecture Suite', () => {
   it('verifies all homepage sections are cleanly exported components', () => {
@@ -58,6 +63,14 @@ describe('Phase 4 Homepage & Showcase Architecture Suite', () => {
     expect(edu.cgpa).toBe('7.96');
     expect(edu.startYear).toBe(2024);
     expect(edu.endYear).toBe(2028);
+  });
+
+  it('validates verified professional internship dates are strictly June 2026 - July 2026', () => {
+    expect(professionalInternships.length).toBe(2);
+    expect(professionalInternships[0].startDate).toBe('June 2026');
+    expect(professionalInternships[0].endDate).toBe('July 2026');
+    expect(professionalInternships[1].startDate).toBe('June 2026');
+    expect(professionalInternships[1].endDate).toBe('July 2026');
   });
 });
 

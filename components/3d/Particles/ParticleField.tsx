@@ -200,8 +200,8 @@ export const ParticleField: React.FC<ParticleFieldProps> = ({
   }
 
   return (
-    <points ref={pointsRef}>
-      <bufferGeometry ref={geomRef}>
+    <points key={`particles-${count}`} ref={pointsRef}>
+      <bufferGeometry key={`geom-${count}`} ref={geomRef}>
         <bufferAttribute
           attach="attributes-position"
           count={positions.length / 3}

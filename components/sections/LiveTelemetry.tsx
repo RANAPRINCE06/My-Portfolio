@@ -77,7 +77,14 @@ export const LiveTelemetry: React.FC = () => {
   const hr = competitiveProgrammingProfiles.find((p) => p.platform === 'HackerRank');
 
   return (
-    <section id="statistics" aria-label="Developer Telemetry & Metrics" className="flex flex-col gap-6">
+    <section
+      id="statistics"
+      aria-label="Developer Telemetry & Metrics"
+      className="relative flex scroll-mt-28 flex-col gap-6"
+    >
+      {/* Anchor for Achievements navigation target */}
+      <div id="achievements" className="absolute top-0 -mt-28" aria-hidden="true" />
+
       {/* Section Header */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
         <div>

@@ -1,0 +1,419 @@
+{
+  "consoleErrors": [],
+  "auditResults": [
+    {
+      "viewport": "desktop-1920x1080",
+      "width": 1920,
+      "height": 1080,
+      "hasHorizontalOverflow": false,
+      "docWidth": 1920,
+      "winWidth": 1920,
+      "sections": {
+        "hero": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "about": {
+          "exists": true,
+          "visible": false,
+          "scrollMarginTop": "0px"
+        },
+        "statistics": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "projects": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "skills": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "achievements": {
+          "exists": true,
+          "visible": false,
+          "scrollMarginTop": "0px"
+        },
+        "contact": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        }
+      },
+      "screenshot": "C:\\Users\\Prince\\OneDrive\\Desktop\\New folder\\My porfolio\\screenshots\\desktop-1920x1080.png"
+    },
+    {
+      "viewport": "desktop-1440x900",
+      "width": 1440,
+      "height": 900,
+      "hasHorizontalOverflow": false,
+      "docWidth": 1440,
+      "winWidth": 1440,
+      "sections": {
+        "hero": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "about": {
+          "exists": true,
+          "visible": false,
+          "scrollMarginTop": "0px"
+        },
+        "statistics": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "projects": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "skills": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "achievements": {
+          "exists": true,
+          "visible": false,
+          "scrollMarginTop": "0px"
+        },
+        "contact": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        }
+      },
+      "screenshot": "C:\\Users\\Prince\\OneDrive\\Desktop\\New folder\\My porfolio\\screenshots\\desktop-1440x900.png"
+    },
+    {
+      "viewport": "desktop-1366x768",
+      "width": 1366,
+      "height": 768,
+      "hasHorizontalOverflow": false,
+      "docWidth": 1366,
+      "winWidth": 1366,
+      "sections": {
+        "hero": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "about": {
+          "exists": true,
+          "visible": false,
+          "scrollMarginTop": "0px"
+        },
+        "statistics": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "projects": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "skills": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "achievements": {
+          "exists": true,
+          "visible": false,
+          "scrollMarginTop": "0px"
+        },
+        "contact": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        }
+      },
+      "screenshot": "C:\\Users\\Prince\\OneDrive\\Desktop\\New folder\\My porfolio\\screenshots\\desktop-1366x768.png"
+    },
+    {
+      "viewport": "laptop-1280x800",
+      "width": 1280,
+      "height": 800,
+      "hasHorizontalOverflow": false,
+      "docWidth": 1280,
+      "winWidth": 1280,
+      "sections": {
+        "hero": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "about": {
+          "exists": true,
+          "visible": false,
+          "scrollMarginTop": "0px"
+        },
+        "statistics": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "projects": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "skills": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "achievements": {
+          "exists": true,
+          "visible": false,
+          "scrollMarginTop": "0px"
+        },
+        "contact": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        }
+      },
+      "screenshot": "C:\\Users\\Prince\\OneDrive\\Desktop\\New folder\\My porfolio\\screenshots\\laptop-1280x800.png"
+    },
+    {
+      "viewport": "laptop-1024x768",
+      "width": 1024,
+      "height": 768,
+      "hasHorizontalOverflow": false,
+      "docWidth": 1024,
+      "winWidth": 1024,
+      "sections": {
+        "hero": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "about": {
+          "exists": true,
+          "visible": false,
+          "scrollMarginTop": "0px"
+        },
+        "statistics": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "projects": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "skills": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "achievements": {
+          "exists": true,
+          "visible": false,
+          "scrollMarginTop": "0px"
+        },
+        "contact": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        }
+      },
+      "screenshot": "C:\\Users\\Prince\\OneDrive\\Desktop\\New folder\\My porfolio\\screenshots\\laptop-1024x768.png"
+    },
+    {
+      "viewport": "tablet-768x1024",
+      "width": 768,
+      "height": 1024,
+      "hasHorizontalOverflow": false,
+      "docWidth": 768,
+      "winWidth": 768,
+      "sections": {
+        "hero": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "about": {
+          "exists": true,
+          "visible": false,
+          "scrollMarginTop": "0px"
+        },
+        "statistics": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "projects": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "skills": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "achievements": {
+          "exists": true,
+          "visible": false,
+          "scrollMarginTop": "0px"
+        },
+        "contact": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        }
+      },
+      "screenshot": "C:\\Users\\Prince\\OneDrive\\Desktop\\New folder\\My porfolio\\screenshots\\tablet-768x1024.png"
+    },
+    {
+      "viewport": "mobile-430x932",
+      "width": 430,
+      "height": 932,
+      "hasHorizontalOverflow": false,
+      "docWidth": 430,
+      "winWidth": 430,
+      "sections": {
+        "hero": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "about": {
+          "exists": true,
+          "visible": false,
+          "scrollMarginTop": "0px"
+        },
+        "statistics": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "projects": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "skills": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "achievements": {
+          "exists": true,
+          "visible": false,
+          "scrollMarginTop": "0px"
+        },
+        "contact": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        }
+      },
+      "screenshot": "C:\\Users\\Prince\\OneDrive\\Desktop\\New folder\\My porfolio\\screenshots\\mobile-430x932.png"
+    },
+    {
+      "viewport": "mobile-390x844",
+      "width": 390,
+      "height": 844,
+      "hasHorizontalOverflow": false,
+      "docWidth": 390,
+      "winWidth": 390,
+      "sections": {
+        "hero": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "about": {
+          "exists": true,
+          "visible": false,
+          "scrollMarginTop": "0px"
+        },
+        "statistics": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "projects": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "skills": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "achievements": {
+          "exists": true,
+          "visible": false,
+          "scrollMarginTop": "0px"
+        },
+        "contact": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        }
+      },
+      "screenshot": "C:\\Users\\Prince\\OneDrive\\Desktop\\New folder\\My porfolio\\screenshots\\mobile-390x844.png"
+    },
+    {
+      "viewport": "mobile-375x812",
+      "width": 375,
+      "height": 812,
+      "hasHorizontalOverflow": false,
+      "docWidth": 375,
+      "winWidth": 375,
+      "sections": {
+        "hero": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "about": {
+          "exists": true,
+          "visible": false,
+          "scrollMarginTop": "0px"
+        },
+        "statistics": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "projects": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "skills": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        },
+        "achievements": {
+          "exists": true,
+          "visible": false,
+          "scrollMarginTop": "0px"
+        },
+        "contact": {
+          "exists": true,
+          "visible": true,
+          "scrollMarginTop": "112px"
+        }
+      },
+      "screenshot": "C:\\Users\\Prince\\OneDrive\\Desktop\\New folder\\My porfolio\\screenshots\\mobile-375x812.png"
+    }
+  ]
+}
