@@ -14,6 +14,8 @@ import { createCyberCoreUniforms } from './CyberCoreMaterial';
 interface CyberCoreProps {
   config: ScenePerformanceConfig;
   prefersReducedMotion?: boolean;
+  /** World-space offset for the entire CyberCore group. Defaults to [0,0,0]. */
+  position?: [number, number, number];
 }
 
 /**
@@ -25,11 +27,18 @@ interface CyberCoreProps {
 export const CyberCore: React.FC<CyberCoreProps> = ({
   config,
   prefersReducedMotion = false,
+  position = [0, 0, 0],
 }) => {
   const groupRef = useRef<THREE.Group>(null);
   const coreMeshRef = useRef<THREE.Mesh>(null);
   const outerCageRef = useRef<THREE.Mesh>(null);
   const materialRef = useRef<THREE.ShaderMaterial>(null);
+
+  // Orbital ring refs for independent animation
+  const ring1Ref = useRef<THREE.Mesh>(null);
+  const ring2Ref = useRef<THREE.Mesh>(null);
+  const ring3Ref = useRef<THREE.Mesh>(null);
+  const ring4Ref = useRef<THREE.Mesh>(null);
 
   // Geometry subdivision count based on performance tier
   const subdivisionDetail = useMemo(() => {
@@ -108,13 +117,29 @@ export const CyberCore: React.FC<CyberCoreProps> = ({
       outerCageRef.current.rotation.y -= delta * 0.35;
       outerCageRef.current.rotation.z += delta * 0.15;
     }
+
+    // 6. Orbital Energy Ring Animations (independent speeds + axes)
+    if (ring1Ref.current) {
+      ring1Ref.current.rotation.z += delta * 0.55;
+    }
+    if (ring2Ref.current) {
+      ring2Ref.current.rotation.y += delta * 0.38;
+      ring2Ref.current.rotation.x -= delta * 0.12;
+    }
+    if (ring3Ref.current) {
+      ring3Ref.current.rotation.x += delta * 0.28;
+      ring3Ref.current.rotation.z -= delta * 0.22;
+    }
+    if (ring4Ref.current) {
+      ring4Ref.current.rotation.y -= delta * 0.42;
+    }
   });
 
   return (
-    <group ref={groupRef} position={[0, 0, 0]}>
-      {/* Inner Quantum Shader-Driven Core */}
+    <group ref={groupRef} position={position}>
+      {/* Inner Quantum Shader-Driven Core — scaled up for Hero prominence */}
       <mesh ref={coreMeshRef}>
-        <icosahedronGeometry args={[1.2, subdivisionDetail]} />
+        <icosahedronGeometry args={[1.65, subdivisionDetail]} />
         <shaderMaterial
           ref={materialRef}
           vertexShader={cyberCoreVertexShader}
@@ -128,24 +153,40 @@ export const CyberCore: React.FC<CyberCoreProps> = ({
 
       {/* Outer Crystalline Geodesic Lattice Cage */}
       <mesh ref={outerCageRef}>
-        <icosahedronGeometry args={[1.65, 1]} />
+        <icosahedronGeometry args={[2.2, 1]} />
         <meshBasicMaterial
           color="#00F0FF"
           wireframe
           transparent
-          opacity={config.tier === 'low' ? 0.15 : 0.24}
+          opacity={config.tier === 'low' ? 0.12 : config.tier === 'high' ? 0.32 : 0.2}
         />
       </mesh>
 
-      {/* Subtle Inner Violet Energy Filament Ring */}
-      <mesh rotation={[Math.PI / 3, 0, 0]}>
-        <torusGeometry args={[1.45, 0.008, 8, 48]} />
-        <meshBasicMaterial
-          color="#8A2BE2"
-          transparent
-          opacity={0.35}
-        />
+      {/* Orbital Energy Ring 1 — Cyan primary, equatorial tilt */}
+      <mesh ref={ring1Ref} rotation={[Math.PI / 2, 0, Math.PI / 6]}>
+        <torusGeometry args={[2.5, 0.012, 8, 64]} />
+        <meshBasicMaterial color="#00F0FF" transparent opacity={config.tier === 'low' ? 0.2 : 0.55} />
       </mesh>
+
+      {/* Orbital Energy Ring 2 — Violet, 55° inclination */}
+      <mesh ref={ring2Ref} rotation={[Math.PI / 3, Math.PI / 4, 0]}>
+        <torusGeometry args={[2.85, 0.009, 8, 64]} />
+        <meshBasicMaterial color="#8A2BE2" transparent opacity={config.tier === 'low' ? 0.15 : 0.45} />
+      </mesh>
+
+      {/* Orbital Energy Ring 3 — Cyan, perpendicular axis */}
+      <mesh ref={ring3Ref} rotation={[0, Math.PI / 5, Math.PI / 2]}>
+        <torusGeometry args={[3.15, 0.007, 8, 64]} />
+        <meshBasicMaterial color="#00F0FF" transparent opacity={config.tier === 'low' ? 0.1 : 0.3} />
+      </mesh>
+
+      {/* Orbital Energy Ring 4 — Violet, diagonal (high tier only) */}
+      {config.tier !== 'low' && (
+        <mesh ref={ring4Ref} rotation={[Math.PI / 6, 0, Math.PI / 3]}>
+          <torusGeometry args={[3.5, 0.005, 8, 48]} />
+          <meshBasicMaterial color="#8A2BE2" transparent opacity={0.2} />
+        </mesh>
+      )}
     </group>
   );
 };

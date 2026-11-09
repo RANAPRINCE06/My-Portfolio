@@ -38,8 +38,8 @@ export const SceneCanvas: React.FC<SceneCanvasProps> = ({
         }}
         dpr={config.dpr}
         camera={{
-          position: [0, 0, 6],
-          fov: config.targetFov,
+          position: [0, 0, 5.8],
+          fov: 50,
           near: 0.1,
           far: 50,
         }}
