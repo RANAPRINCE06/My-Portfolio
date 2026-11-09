@@ -25,7 +25,11 @@ export const BentoShowcase: React.FC = () => {
   const hackathon = hackathonList[0];
 
   return (
-    <section id="skills" aria-label="Skills & Verified Background" className="flex flex-col gap-6">
+    <section
+      id="skills"
+      aria-label="Skills & Verified Background"
+      className="flex scroll-mt-28 flex-col gap-6"
+    >
       {/* Section Header */}
       <div>
         <div className="flex items-center gap-2">

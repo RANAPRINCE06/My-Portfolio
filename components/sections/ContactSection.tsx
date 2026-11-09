@@ -18,14 +18,37 @@ export const ContactSection: React.FC = () => {
   const [copied, setCopied] = useState(false);
   const email = 'rana.prince1806@gmail.com';
 
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText(email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
+  const handleCopyEmail = async () => {
+    try {
+      if (typeof navigator !== 'undefined' && navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(email);
+      } else {
+        // Fallback for browsers or environments without clipboard API
+        const textArea = document.createElement('textarea');
+        textArea.value = email;
+        textArea.style.position = 'fixed';
+        textArea.style.opacity = '0';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+      }
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    } catch {
+      // Graceful fallback
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    }
   };
 
   return (
-    <section id="contact" aria-label="Contact & Inquiries" className="flex flex-col gap-6">
+    <section
+      id="contact"
+      aria-label="Contact & Inquiries"
+      className="flex scroll-mt-28 flex-col gap-6"
+    >
       {/* Section Header */}
       <div>
         <div className="flex items-center gap-2">

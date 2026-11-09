@@ -16,7 +16,11 @@ export const ProjectsSection: React.FC = () => {
   });
 
   return (
-    <section id="projects" aria-label="Curated Engineering Projects" className="flex flex-col gap-8">
+    <section
+      id="projects"
+      aria-label="Curated Engineering Projects"
+      className="flex scroll-mt-28 flex-col gap-8"
+    >
       {/* Section Header */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
         <div>
