@@ -23,7 +23,7 @@ export const SceneCanvas: React.FC<SceneCanvasProps> = ({
 }) => {
   return (
     <div
-      className="absolute inset-0 h-full w-full pointer-events-none"
+      className="pointer-events-none absolute inset-0 z-10 h-full w-full"
       role="region"
       aria-label="3D Ambient Scene"
       aria-hidden="true"
@@ -38,7 +38,7 @@ export const SceneCanvas: React.FC<SceneCanvasProps> = ({
         }}
         dpr={config.dpr}
         camera={{
-          position: [0, 0, 5.8],
+          position: [0, 0, 6.4],
           fov: 50,
           near: 0.1,
           far: 50,
