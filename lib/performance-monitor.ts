@@ -154,4 +154,11 @@ export class PerformanceMonitor {
 }
 
 // Global singleton instance for in-scene monitoring
-export const globalPerformanceMonitor = new PerformanceMonitor();
+// Calibrated to tolerate brief shader compilation / hydration dips without false downgrades
+export const globalPerformanceMonitor = new PerformanceMonitor({
+  windowSize: 60,
+  highTierMinFps: 36,
+  balancedTierMinFps: 24,
+  cooldownMs: 5000,
+  minSamplesBeforeEvaluation: 60,
+});

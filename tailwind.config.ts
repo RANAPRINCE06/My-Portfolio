@@ -52,7 +52,7 @@ const config: Config = {
         '8xl': '88rem',
       },
       zIndex: {
-        canvas: '-1',
+        canvas: '0',
         content: '1',
         dock: '40',
         modal: '50',

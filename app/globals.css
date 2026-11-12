@@ -16,18 +16,12 @@
 html {
   background-color: var(--color-bg-primary);
   color: var(--color-text-primary);
-  scroll-behavior: smooth;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
+  overflow-x: clip;
 }
 
 body {
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow-x: clip;
   font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
 }
 

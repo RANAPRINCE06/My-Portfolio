@@ -22,9 +22,16 @@ export const PerformanceMonitorInScene: React.FC<PerformanceMonitorInSceneProps>
   disabled = false,
 }) => {
   const isDowngradingRef = useRef(false);
+  const warmupFramesRef = useRef(0);
 
   useFrame((_, delta) => {
     if (disabled || isDowngradingRef.current) return;
+
+    // Allow initial shader compilation & page hydration to settle before sampling FPS
+    if (warmupFramesRef.current < 90) {
+      warmupFramesRef.current += 1;
+      return;
+    }
 
     // Record frame timing to circular rolling buffer
     globalPerformanceMonitor.recordFrame(delta);
@@ -33,11 +40,13 @@ export const PerformanceMonitorInScene: React.FC<PerformanceMonitorInSceneProps>
     const nextTier = globalPerformanceMonitor.checkDowngrade(currentTier);
     if (nextTier && onDowngrade) {
       isDowngradingRef.current = true;
+      globalPerformanceMonitor.reset();
+      warmupFramesRef.current = 0;
       onDowngrade(nextTier);
-      // Reset flag after a moment to allow further downgrades if degradation persists
+      // Reset flag after cooldown to allow further evaluation on fresh frames
       setTimeout(() => {
         isDowngradingRef.current = false;
-      }, 4000);
+      }, 5000);
     }
   });
 

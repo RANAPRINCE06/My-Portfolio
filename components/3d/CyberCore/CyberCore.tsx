@@ -72,7 +72,7 @@ export const CyberCore: React.FC<CyberCoreProps> = ({
       if (groupRef.current) {
         groupRef.current.rotation.set(0, 0, 0);
         groupRef.current.position.set(position[0], position[1], position[2]);
-        groupRef.current.scale.setScalar(1);
+        groupRef.current.scale.setScalar(0.86);
       }
       return;
     }
@@ -112,7 +112,7 @@ export const CyberCore: React.FC<CyberCoreProps> = ({
       damp
     );
 
-    const targetScale = 1.0 - Math.sin(scroll.progress * Math.PI) * 0.14;
+    const targetScale = 0.86 - Math.sin(scroll.progress * Math.PI) * 0.14;
     const nextScale = THREE.MathUtils.lerp(groupRef.current.scale.x, targetScale, damp);
     groupRef.current.scale.setScalar(nextScale);
 
@@ -176,26 +176,26 @@ export const CyberCore: React.FC<CyberCoreProps> = ({
           color="#00F0FF"
           wireframe
           transparent
-          opacity={config.tier === 'low' ? 0.12 : config.tier === 'high' ? 0.32 : 0.2}
+          opacity={config.tier === 'low' ? 0.22 : config.tier === 'high' ? 0.34 : 0.26}
         />
       </mesh>
 
       {/* Orbital Energy Ring 1 — Cyan primary, equatorial tilt */}
       <mesh ref={ring1Ref} rotation={[Math.PI / 2, 0, Math.PI / 6]}>
-        <torusGeometry args={[2.5, 0.012, 8, 64]} />
-        <meshBasicMaterial color="#00F0FF" transparent opacity={config.tier === 'low' ? 0.2 : 0.55} />
+        <torusGeometry args={[2.5, 0.014, 8, 64]} />
+        <meshBasicMaterial color="#00F0FF" transparent opacity={config.tier === 'low' ? 0.38 : 0.58} />
       </mesh>
 
       {/* Orbital Energy Ring 2 — Violet, 55° inclination */}
       <mesh ref={ring2Ref} rotation={[Math.PI / 3, Math.PI / 4, 0]}>
-        <torusGeometry args={[2.85, 0.009, 8, 64]} />
-        <meshBasicMaterial color="#8A2BE2" transparent opacity={config.tier === 'low' ? 0.15 : 0.45} />
+        <torusGeometry args={[2.85, 0.011, 8, 64]} />
+        <meshBasicMaterial color="#8A2BE2" transparent opacity={config.tier === 'low' ? 0.28 : 0.48} />
       </mesh>
 
       {/* Orbital Energy Ring 3 — Cyan, perpendicular axis */}
       <mesh ref={ring3Ref} rotation={[0, Math.PI / 5, Math.PI / 2]}>
-        <torusGeometry args={[3.15, 0.007, 8, 64]} />
-        <meshBasicMaterial color="#00F0FF" transparent opacity={config.tier === 'low' ? 0.1 : 0.3} />
+        <torusGeometry args={[3.15, 0.008, 8, 64]} />
+        <meshBasicMaterial color="#00F0FF" transparent opacity={config.tier === 'low' ? 0.2 : 0.34} />
       </mesh>
 
       {/* Orbital Energy Ring 4 — Violet, diagonal (high tier only) */}

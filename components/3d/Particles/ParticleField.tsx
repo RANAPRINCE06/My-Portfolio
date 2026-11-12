@@ -130,8 +130,8 @@ export const ParticleField: React.FC<ParticleFieldProps> = ({
     // On low mobile profiles, avoid per-particle CPU calculations.
     // Rotate the point cloud uniformly in a single GPU draw call.
     if (config.tier === 'low' || !config.enableInteractiveParallax) {
-      pointsRef.current.rotation.y += delta * 0.03 + scrollOrbitalBoost;
-      pointsRef.current.rotation.x = Math.sin(time * 0.1) * 0.05;
+      pointsRef.current.rotation.y += delta * 0.08 + scrollOrbitalBoost;
+      pointsRef.current.rotation.x = Math.sin(time * 0.2) * 0.08;
       return;
     }
 
