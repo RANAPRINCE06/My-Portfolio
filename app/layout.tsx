@@ -3,6 +3,8 @@ import { Inter, Space_Grotesk, JetBrains_Mono } from 'next/font/google';
 import { env } from '@/lib/env';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
+import { ScrollProgressBar } from '@/components/layout/ScrollProgressBar';
+import { SectionNavigationRail } from '@/components/layout/SectionNavigationRail';
 import { SceneContainer } from '@/components/3d/SceneContainer';
 import { SmoothScrollProvider } from '@/components/providers/SmoothScrollProvider';
 import './globals.css';
@@ -103,9 +105,11 @@ export default function RootLayout({
       </head>
       <body className="font-body bg-background-primary text-text-primary antialiased selection:bg-accent-cyan/30 selection:text-text-primary">
         <SmoothScrollProvider>
+          <ScrollProgressBar />
           <SceneContainer />
           <Navbar />
-          <main className="relative z-content min-h-screen pt-28 pb-20">{children}</main>
+          <SectionNavigationRail />
+          <main className="relative z-content min-h-screen overflow-x-clip pt-28 pb-20">{children}</main>
           <Footer />
         </SmoothScrollProvider>
       </body>

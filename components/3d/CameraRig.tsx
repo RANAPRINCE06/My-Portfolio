@@ -4,6 +4,7 @@ import React, { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { CameraRigConfig } from '@/types/scene';
+import { getScrollState } from '@/lib/scroll-bridge';
 
 interface CameraRigProps {
   enableParallax?: boolean;
@@ -39,29 +40,38 @@ export const CameraRig: React.FC<CameraRigProps> = ({
   const lookTarget = useRef(new THREE.Vector3(0, 0, 0));
 
   useFrame((state, delta) => {
-    // 1. Accessibility & Safety Guard: If user prefers reduced motion or parallax is disabled,
-    // lock camera strictly to base coordinates without frame jitter.
-    if (prefersReducedMotion || !enableParallax) {
+    // 1. Accessibility Guard: if user prefers reduced motion, lock camera strictly to base coordinates
+    if (prefersReducedMotion) {
       state.camera.position.set(
         mergedConfig.basePosition[0],
         mergedConfig.basePosition[1],
         mergedConfig.basePosition[2]
       );
+      lookTarget.current.set(0, 0, 0);
       state.camera.lookAt(lookTarget.current);
       return;
     }
 
-    // 2. Subtle pointer-based target calculation (normalized -1 to 1)
-    const pointerX = THREE.MathUtils.clamp(state.pointer.x, -1, 1);
-    const pointerY = THREE.MathUtils.clamp(state.pointer.y, -1, 1);
+    const scroll = getScrollState();
 
-    const targetX = mergedConfig.basePosition[0] + pointerX * mergedConfig.maxOffsetX;
-    const targetY = mergedConfig.basePosition[1] + pointerY * mergedConfig.maxOffsetY;
-    const targetZ = mergedConfig.basePosition[2];
+    // 2. Bounded scroll-linked camera choreography
+    // Hero (0.0): [-1.0, 0, 5.8] -> Mid-sections (0.5): [-0.05, -0.08, 6.4] -> Contact (1.0): [0.35, -0.04, 6.0]
+    const scrollShiftX = THREE.MathUtils.lerp(0, 1.35, scroll.progress);
+    const scrollShiftY = -Math.sin(scroll.progress * Math.PI) * 0.1;
+    const scrollShiftZ = Math.sin(scroll.progress * Math.PI) * 0.65;
+
+    // 3. Subtle pointer-based target calculation (only when parallax is enabled)
+    const pointerX = enableParallax ? THREE.MathUtils.clamp(state.pointer.x, -1, 1) : 0;
+    const pointerY = enableParallax ? THREE.MathUtils.clamp(state.pointer.y, -1, 1) : 0;
+
+    const targetX = mergedConfig.basePosition[0] + scrollShiftX + pointerX * mergedConfig.maxOffsetX;
+    const targetY = mergedConfig.basePosition[1] + scrollShiftY + pointerY * mergedConfig.maxOffsetY;
+    const targetZ = mergedConfig.basePosition[2] + scrollShiftZ;
 
     targetPos.current.set(targetX, targetY, targetZ);
+    lookTarget.current.set(0, -scroll.progress * 0.15, 0);
 
-    // 3. Smooth, frame-rate independent dampening using delta
+    // 4. Smooth, frame-rate independent dampening using delta
     const dampFactor = Math.min(delta * mergedConfig.smoothSpeed, 1);
     state.camera.position.lerp(targetPos.current, dampFactor);
     state.camera.lookAt(lookTarget.current);

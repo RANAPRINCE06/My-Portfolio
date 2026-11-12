@@ -2,8 +2,8 @@
 
 import { useEffect, useRef } from 'react';
 import Lenis from 'lenis';
-import { synchronizeLenisAndGsap } from '@/lib/gsap';
-import { updateScrollState } from '@/lib/scroll-bridge';
+import { ScrollTrigger, synchronizeLenisAndGsap } from '@/lib/gsap';
+import { setLenisInstance, updateScrollState } from '@/lib/scroll-bridge';
 import { useReducedMotion } from './useReducedMotion';
 
 /**
@@ -50,6 +50,7 @@ export function useLenis() {
     });
 
     lenisRef.current = lenis;
+    setLenisInstance(lenis);
 
     // Bridge Lenis scroll events to 3D scene store
     const handleLenisScroll = (e: {
@@ -67,15 +68,29 @@ export function useLenis() {
 
     lenis.on('scroll', handleLenisScroll);
 
+    // Pause smooth scroll inertia when tab is backgrounded
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        lenis.stop();
+      } else {
+        lenis.start();
+        ScrollTrigger.refresh();
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
     // Synchronize Lenis with GSAP's central RAF ticker
     const cleanupSync = synchronizeLenisAndGsap(lenis);
 
     // Initial sync
     handleNativeScroll();
+    ScrollTrigger.refresh();
 
     return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       lenis.off('scroll', handleLenisScroll);
       cleanupSync();
+      setLenisInstance(null);
       lenis.destroy();
       lenisRef.current = null;
     };

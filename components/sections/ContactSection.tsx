@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Mail,
   Copy,
@@ -12,11 +12,112 @@ import {
   Terminal,
 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
+import { MagneticWrapper } from '@/components/ui/MagneticWrapper';
+import { SplitTextReveal } from '@/components/ui/SplitTextReveal';
+import { gsap } from '@/lib/gsap';
+import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { personalProfile } from '@/content';
 
 export const ContactSection: React.FC = () => {
   const [copied, setCopied] = useState(false);
   const email = 'rana.prince1806@gmail.com';
+  const sectionRef = useRef<HTMLElement>(null);
+  const ambientRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section || prefersReducedMotion) return;
+
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
+    const ctx = gsap.context(() => {
+      // 1. Gradual cinematic background movement
+      if (ambientRef.current && !isMobile) {
+        gsap.fromTo(
+          ambientRef.current,
+          { opacity: 0.2, scale: 0.92, y: 18 },
+          {
+            opacity: 0.9,
+            scale: 1.06,
+            y: -8,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: section,
+              start: 'top 90%',
+              end: 'bottom 80%',
+              scrub: 0.85,
+            },
+          }
+        );
+      }
+
+      // 2. Contact eyebrow reveal
+      gsap.from('.contact-eyebrow', {
+        y: 12,
+        opacity: 0,
+        duration: 0.5,
+        ease: 'power3.out',
+        clearProps: 'transform,opacity',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 86%',
+          once: true,
+        },
+      });
+
+      // 3. Main dispatch terminal card scale/reveal
+      gsap.from('.contact-terminal-card', {
+        y: isMobile ? 16 : 24,
+        scale: 0.97,
+        opacity: 0,
+        duration: isMobile ? 0.4 : 0.55,
+        ease: 'power3.out',
+        clearProps: 'transform,opacity',
+        scrollTrigger: {
+          trigger: '.contact-terminal-card',
+          start: 'top 90%',
+          once: true,
+        },
+      });
+
+      // 4. CTA buttons entrance stagger
+      gsap.from('.contact-cta-item', {
+        y: 12,
+        opacity: 0,
+        duration: 0.4,
+        stagger: 0.08,
+        delay: 0.1,
+        ease: 'power3.out',
+        clearProps: 'transform,opacity',
+        scrollTrigger: {
+          trigger: '.contact-terminal-card',
+          start: 'top 90%',
+          once: true,
+        },
+      });
+
+      // 5. Channel grid stagger
+      gsap.from('.contact-channel-item', {
+        y: 16,
+        opacity: 0,
+        duration: 0.45,
+        stagger: 0.08,
+        delay: 0.2,
+        ease: 'power3.out',
+        clearProps: 'transform,opacity',
+        scrollTrigger: {
+          trigger: '.contact-channels-grid',
+          start: 'top 90%',
+          once: true,
+        },
+      });
+    }, sectionRef);
+
+    return () => {
+      ctx.revert();
+    };
+  }, [prefersReducedMotion]);
 
   const handleCopyEmail = async () => {
     try {
@@ -45,25 +146,39 @@ export const ContactSection: React.FC = () => {
 
   return (
     <section
+      ref={sectionRef}
       id="contact"
       aria-label="Contact & Inquiries"
-      className="flex scroll-mt-28 flex-col gap-6"
+      className="relative flex scroll-mt-28 flex-col gap-6"
     >
+      {/* Subtle finale ambient glow */}
+      <div
+        ref={ambientRef}
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10 rounded-3xl opacity-40"
+        style={{
+          background:
+            'radial-gradient(ellipse 65% 60% at 50% 60%, rgba(138, 43, 226, 0.07) 0%, rgba(0, 240, 255, 0.05) 45%, transparent 75%)',
+        }}
+      />
+
       {/* Section Header */}
       <div>
-        <div className="flex items-center gap-2">
+        <div className="contact-eyebrow flex items-center gap-2">
           <span className="h-2 w-2 rounded-full bg-accent-cyan" />
           <span className="font-mono text-xs uppercase tracking-wider text-text-muted">
             DISPATCH &bull; CONNECT
           </span>
         </div>
-        <h2 className="mt-2 font-display text-3xl font-bold tracking-tight text-text-primary sm:text-4xl">
-          Initiate Engineering Collaboration
-        </h2>
+        <SplitTextReveal
+          text="Initiate Engineering Collaboration"
+          as="h2"
+          className="mt-2 font-display text-3xl font-bold tracking-tight text-text-primary sm:text-4xl"
+        />
       </div>
 
       {/* Main Terminal Card */}
-      <div className="rounded-2xl border border-border-subtle bg-background-glass/80 p-8 backdrop-blur-xl transition-all duration-300 hover:border-accent-cyan/40 shadow-card-glass">
+      <div className="contact-terminal-card rounded-2xl border border-border-subtle bg-background-glass/80 p-8 backdrop-blur-xl transition-all duration-300 hover:border-accent-cyan/40 shadow-card-glass">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-border-subtle/80 pb-8">
           <div>
             <div className="inline-flex items-center gap-2 font-mono text-xs text-accent-cyan mb-2">
@@ -80,30 +195,38 @@ export const ContactSection: React.FC = () => {
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <Button
-              href={`mailto:${email}`}
-              variant="primary"
-              size="md"
-            >
-              <Mail className="h-4 w-4" />
-              Send Email
-            </Button>
-            <Button
-              href={personalProfile.resumeUrl}
-              external
-              variant="secondary"
-              size="md"
-            >
-              <FileText className="h-4 w-4" />
-              View Resume
-            </Button>
+            <div className="contact-cta-item">
+              <MagneticWrapper strength={0.22} maxOffset={9}>
+                <Button
+                  href={`mailto:${email}`}
+                  variant="primary"
+                  size="md"
+                >
+                  <Mail className="h-4 w-4" />
+                  Send Email
+                </Button>
+              </MagneticWrapper>
+            </div>
+            <div className="contact-cta-item">
+              <MagneticWrapper strength={0.22} maxOffset={9}>
+                <Button
+                  href={personalProfile.resumeUrl}
+                  external
+                  variant="secondary"
+                  size="md"
+                >
+                  <FileText className="h-4 w-4" />
+                  View Resume
+                </Button>
+              </MagneticWrapper>
+            </div>
           </div>
         </div>
 
         {/* Channels Grid */}
-        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="contact-channels-grid mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {/* Email Channel */}
-          <div className="flex items-center justify-between rounded-xl border border-border-subtle/70 bg-background-surface/40 p-4">
+          <div className="contact-channel-item flex items-center justify-between rounded-xl border border-border-subtle/70 bg-background-surface/40 p-4">
             <div className="flex items-center gap-3 overflow-hidden">
               <Mail className="h-5 w-5 text-accent-cyan shrink-0" />
               <div className="overflow-hidden">
@@ -134,7 +257,7 @@ export const ContactSection: React.FC = () => {
             href="https://www.linkedin.com/in/prince-rana-0b622b32a"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-between rounded-xl border border-border-subtle/70 bg-background-surface/40 p-4 transition-all hover:border-accent-cyan hover:bg-accent-cyan/5 group"
+            className="contact-channel-item flex items-center justify-between rounded-xl border border-border-subtle/70 bg-background-surface/40 p-4 transition-all hover:border-accent-cyan hover:bg-accent-cyan/5 group"
           >
             <div className="flex items-center gap-3">
               <Linkedin className="h-5 w-5 text-accent-violet group-hover:text-accent-cyan transition-colors" />
@@ -155,7 +278,7 @@ export const ContactSection: React.FC = () => {
             href="https://github.com/RANAPRINCE06"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-between rounded-xl border border-border-subtle/70 bg-background-surface/40 p-4 transition-all hover:border-accent-cyan hover:bg-accent-cyan/5 group"
+            className="contact-channel-item flex items-center justify-between rounded-xl border border-border-subtle/70 bg-background-surface/40 p-4 transition-all hover:border-accent-cyan hover:bg-accent-cyan/5 group"
           >
             <div className="flex items-center gap-3">
               <Github className="h-5 w-5 text-text-primary group-hover:text-accent-cyan transition-colors" />
@@ -175,4 +298,5 @@ export const ContactSection: React.FC = () => {
     </section>
   );
 };
+
 

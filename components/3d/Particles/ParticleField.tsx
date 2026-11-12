@@ -102,6 +102,7 @@ export const ParticleField: React.FC<ParticleFieldProps> = ({
     if (prefersReducedMotion) {
       pointsRef.current.position.set(0, 0, 0);
       pointsRef.current.rotation.set(0, 0, 0);
+      pointsRef.current.scale.setScalar(1);
       return;
     }
 
@@ -109,10 +110,21 @@ export const ParticleField: React.FC<ParticleFieldProps> = ({
     elapsedTime.current += delta;
     const time = elapsedTime.current;
 
-    // 2. Lenis Scroll Dynamics
-    // As the user scrolls, the particle cloud smoothly lowers and subtly dilates
-    pointsRef.current.position.y = -scroll.progress * 1.6;
-    const scrollOrbitalBoost = scroll.velocity * 0.0006;
+    // 2. Lenis Scroll Dynamics (bounded displacement and subtle radial expansion)
+    const clampedVelocity = THREE.MathUtils.clamp(scroll.velocity, -40, 40);
+    const damp = Math.min(delta * 4, 1);
+    pointsRef.current.position.y = THREE.MathUtils.lerp(
+      pointsRef.current.position.y,
+      -scroll.progress * 1.45,
+      damp
+    );
+    pointsRef.current.position.z = THREE.MathUtils.lerp(
+      pointsRef.current.position.z,
+      Math.sin(scroll.progress * Math.PI) * 0.35,
+      damp
+    );
+    pointsRef.current.scale.setScalar(1 + Math.sin(scroll.progress * Math.PI) * 0.08);
+    const scrollOrbitalBoost = clampedVelocity * 0.0005;
 
     // 3. Low-Tier Optimization:
     // On low mobile profiles, avoid per-particle CPU calculations.

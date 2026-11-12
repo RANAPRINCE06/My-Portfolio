@@ -43,6 +43,7 @@ export const Button: React.FC<ButtonProps> = ({
   size,
   href,
   external,
+  onClick,
   children,
   ...props
 }) => {
@@ -53,6 +54,7 @@ export const Button: React.FC<ButtonProps> = ({
           href={href}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={onClick as unknown as React.MouseEventHandler<HTMLAnchorElement>}
           className={cn(buttonVariants({ variant, size, className }))}
         >
           {children}
@@ -60,14 +62,18 @@ export const Button: React.FC<ButtonProps> = ({
       );
     }
     return (
-      <Link href={href} className={cn(buttonVariants({ variant, size, className }))}>
+      <Link
+        href={href}
+        onClick={onClick as unknown as React.MouseEventHandler<HTMLAnchorElement>}
+        className={cn(buttonVariants({ variant, size, className }))}
+      >
         {children}
       </Link>
     );
   }
 
   return (
-    <button className={cn(buttonVariants({ variant, size, className }))} {...props}>
+    <button onClick={onClick} className={cn(buttonVariants({ variant, size, className }))} {...props}>
       {children}
     </button>
   );
