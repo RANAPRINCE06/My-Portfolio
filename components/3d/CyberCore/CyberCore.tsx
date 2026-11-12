@@ -71,7 +71,8 @@ export const CyberCore: React.FC<CyberCoreProps> = ({
     if (prefersReducedMotion) {
       if (groupRef.current) {
         groupRef.current.rotation.set(0, 0, 0);
-        groupRef.current.position.set(0, 0, 0);
+        groupRef.current.position.set(position[0], position[1], position[2]);
+        groupRef.current.scale.setScalar(1);
       }
       return;
     }
@@ -83,14 +84,13 @@ export const CyberCore: React.FC<CyberCoreProps> = ({
 
     if (!groupRef.current) return;
 
-    // 3. Lenis Scroll-Linked Axial Dynamics
-    // Scroll progress (0 to 1) gently rotates the core along Y and X
-    const scrollRotY = scroll.progress * Math.PI * 1.5;
+    // 3. Lenis Scroll-Linked Axial & Spatial Dynamics (strictly bounded)
+    const clampedVelocity = THREE.MathUtils.clamp(scroll.velocity, -40, 40);
+    const scrollRotY = scroll.progress * Math.PI * 1.6;
     const scrollRotX = Math.sin(scroll.progress * Math.PI) * 0.35;
-    const scrollVelocityOffset = scroll.velocity * 0.0008;
+    const scrollVelocityOffset = clampedVelocity * 0.0007;
 
     // 4. Subtle Cursor Tracking (Pointer Parallax)
-    // Pointer coordinates (-1 to 1) gently tip the orientation of the core
     const isParallaxEnabled = config.enableInteractiveParallax && config.tier !== 'low';
     const pointerInfluenceX = isParallaxEnabled ? state.pointer.x * 0.25 : 0;
     const pointerInfluenceY = isParallaxEnabled ? -state.pointer.y * 0.2 : 0;
@@ -99,7 +99,7 @@ export const CyberCore: React.FC<CyberCoreProps> = ({
     targetRotation.current.y += delta * 0.2 + scrollVelocityOffset;
     targetRotation.current.x += delta * 0.08;
 
-    // Dampened interpolation toward composite rotation
+    // Dampened interpolation toward composite rotation, bounded scale, and depth position
     const damp = Math.min(delta * 2.2, 1);
     groupRef.current.rotation.y = THREE.MathUtils.lerp(
       groupRef.current.rotation.y,
@@ -112,26 +112,44 @@ export const CyberCore: React.FC<CyberCoreProps> = ({
       damp
     );
 
+    const targetScale = 1.0 - Math.sin(scroll.progress * Math.PI) * 0.14;
+    const nextScale = THREE.MathUtils.lerp(groupRef.current.scale.x, targetScale, damp);
+    groupRef.current.scale.setScalar(nextScale);
+
+    const targetY = position[1] + Math.sin(scroll.progress * Math.PI) * 0.22;
+    groupRef.current.position.y = THREE.MathUtils.lerp(groupRef.current.position.y, targetY, damp);
+
     // 5. Outer Geodesic Cage Counter-Rotation
     if (outerCageRef.current) {
-      outerCageRef.current.rotation.y -= delta * 0.35;
+      outerCageRef.current.rotation.y -= delta * 0.35 + scrollVelocityOffset * 0.4;
       outerCageRef.current.rotation.z += delta * 0.15;
     }
 
-    // 6. Orbital Energy Ring Animations (independent speeds + axes)
+    // 6. Orbital Energy Ring Animations (scroll-responsive precession & subtle expansion)
+    const ringSpread = 1 + scroll.progress * 0.08;
+    const ringBoost = Math.abs(clampedVelocity) * 0.0005;
+
     if (ring1Ref.current) {
-      ring1Ref.current.rotation.z += delta * 0.55;
+      ring1Ref.current.rotation.z += delta * (0.55 + ringBoost);
+      ring1Ref.current.rotation.x = THREE.MathUtils.lerp(
+        ring1Ref.current.rotation.x,
+        Math.PI / 2 + Math.sin(scroll.progress * Math.PI) * 0.28,
+        damp
+      );
+      ring1Ref.current.scale.setScalar(ringSpread);
     }
     if (ring2Ref.current) {
-      ring2Ref.current.rotation.y += delta * 0.38;
+      ring2Ref.current.rotation.y += delta * (0.38 + ringBoost);
       ring2Ref.current.rotation.x -= delta * 0.12;
+      ring2Ref.current.scale.setScalar(1 + Math.sin(scroll.progress * Math.PI) * 0.07);
     }
     if (ring3Ref.current) {
       ring3Ref.current.rotation.x += delta * 0.28;
-      ring3Ref.current.rotation.z -= delta * 0.22;
+      ring3Ref.current.rotation.z -= delta * (0.22 + ringBoost * 0.6);
     }
     if (ring4Ref.current) {
-      ring4Ref.current.rotation.y -= delta * 0.42;
+      ring4Ref.current.rotation.y -= delta * (0.42 + ringBoost * 0.8);
+      ring4Ref.current.scale.setScalar(ringSpread);
     }
   });
 

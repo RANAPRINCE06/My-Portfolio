@@ -11,11 +11,15 @@ import {
   Zap,
 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
+import { MagneticWrapper } from '@/components/ui/MagneticWrapper';
 import { personalProfile } from '@/content';
+import { gsap } from '@/lib/gsap';
+import { scrollToTarget } from '@/lib/scroll-bridge';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 
 export const HeroSection: React.FC = () => {
   const prefersReducedMotion = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
 
   // Animation target refs
   const pillRef = useRef<HTMLDivElement>(null);
@@ -28,10 +32,11 @@ export const HeroSection: React.FC = () => {
   const hudRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (prefersReducedMotion) return;
+    if (prefersReducedMotion || !sectionRef.current) return;
 
-    // Dynamically import GSAP to keep SSR clean
-    import('gsap').then(({ gsap }) => {
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
+    const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
       const targets = [
@@ -45,10 +50,8 @@ export const HeroSection: React.FC = () => {
         hudRef.current,
       ].filter(Boolean);
 
-      // Set initial hidden states
-      gsap.set(targets, { opacity: 0, y: 24 });
+      gsap.set(targets, { opacity: 0, y: isMobile ? 16 : 24 });
 
-      // Staggered entrance sequence
       tl
         .to(pillRef.current, { opacity: 1, y: 0, duration: 0.55 }, 0.15)
         .to(headlineRef.current, { opacity: 1, y: 0, duration: 0.7 }, 0.4)
@@ -58,11 +61,44 @@ export const HeroSection: React.FC = () => {
         .to(ctasRef.current, { opacity: 1, y: 0, duration: 0.5 }, 1.3)
         .to(socialsRef.current, { opacity: 1, y: 0, duration: 0.5 }, 1.5)
         .to(scrollIndicatorRef.current, { opacity: 1, y: 0, duration: 0.4 }, 1.8);
-    });
+
+      // Subtle scroll-linked transition out from Hero -> Statistics (desktop only)
+      if (!isMobile && hudRef.current) {
+        gsap.to(hudRef.current, {
+          yPercent: -8,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 0.8,
+          },
+        });
+      }
+
+      if (scrollIndicatorRef.current) {
+        gsap.to(scrollIndicatorRef.current, {
+          opacity: 0,
+          y: 10,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top top',
+            end: '15% top',
+            scrub: true,
+          },
+        });
+      }
+    }, sectionRef);
+
+    return () => {
+      ctx.revert();
+    };
   }, [prefersReducedMotion]);
 
   return (
     <section
+      ref={sectionRef}
       id="hero"
       aria-label="Introduction &amp; Overview"
       className="relative flex min-h-[calc(100vh-4rem)] scroll-mt-28 flex-col justify-center pt-8 pb-20 md:pt-4 overflow-hidden"
@@ -134,14 +170,34 @@ export const HeroSection: React.FC = () => {
 
           {/* CTA Buttons */}
           <div ref={ctasRef} className="mt-8 flex flex-wrap items-center gap-4">
-            <Button href="#projects" variant="primary" size="lg">
-              Explore My Work
-              <ArrowUpRight className="h-4 w-4" />
-            </Button>
-            <Button href="#contact" variant="secondary" size="lg">
-              Let&apos;s Connect
-              <Mail className="h-4 w-4" />
-            </Button>
+            <MagneticWrapper strength={0.22} maxOffset={10}>
+              <Button
+                href="#projects"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToTarget('#projects', { offset: -104 });
+                }}
+                variant="primary"
+                size="lg"
+              >
+                Explore My Work
+                <ArrowUpRight className="h-4 w-4" />
+              </Button>
+            </MagneticWrapper>
+            <MagneticWrapper strength={0.22} maxOffset={10}>
+              <Button
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToTarget('#contact', { offset: -104 });
+                }}
+                variant="secondary"
+                size="lg"
+              >
+                Let&apos;s Connect
+                <Mail className="h-4 w-4" />
+              </Button>
+            </MagneticWrapper>
           </div>
 
           {/* Social / Profile Links */}
