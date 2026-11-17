@@ -89,6 +89,9 @@ export interface Project {
   displayOrder: number;
   evidenceSource: string;
   verificationStatus: VerificationStatus;
+  engineeringDecisions?: string[];
+  challenges?: string[];
+  architectureDiagramType?: string;
 }
 
 export interface TechnicalSkill {

@@ -96,6 +96,9 @@ export const ProjectSchema = z.object({
   displayOrder: z.number().int().nonnegative(),
   evidenceSource: z.string().min(1),
   verificationStatus: VerificationStatusSchema,
+  engineeringDecisions: z.array(z.string()).optional(),
+  challenges: z.array(z.string()).optional(),
+  architectureDiagramType: z.string().optional(),
 });
 
 export const SkillCategorySchema = z.enum([
