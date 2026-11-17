@@ -107,6 +107,7 @@ export const SkillCategorySchema = z.enum([
   'Backend Development',
   'Databases',
   'AI / Machine Learning',
+  'AI & Machine Learning',
   'Cloud & DevOps',
   'Developer Tools',
   'Core Computer Science',

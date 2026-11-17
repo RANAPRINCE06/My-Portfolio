@@ -19,7 +19,7 @@ export const professionalInternships: Experience[] = [
       'Implemented clean CSS layouts, responsive design patterns, and cross-browser visual fidelity aligned with production UI/UX requirements.',
       'Collaborated on component-level state management, frontend performance optimization, and Git-based code reviews.',
     ],
-    technologies: ['React.js', 'JavaScript (ES6+)', 'Tailwind CSS', 'HTML5', 'CSS3', 'Git', 'Responsive Design'],
+    technologies: ['React.js', 'Tailwind CSS', 'Bootstrap', 'REST API integration', 'Responsive UI development', 'JavaScript (ES6+)', 'Git'],
     verificationStatus: 'verified',
   },
   {
@@ -37,7 +37,7 @@ export const professionalInternships: Experience[] = [
       'Conducted text data preprocessing, feature extraction, and model performance benchmarking using Python scientific libraries.',
       'Integrated intelligent algorithms and algorithmic logic into prototype software systems.',
     ],
-    technologies: ['Python', 'Machine Learning', 'Data Preprocessing', 'Scikit-Learn', 'NumPy', 'Pandas', 'NLP'],
+    technologies: ['Python', 'Machine Learning', 'Structured Data Analysis', 'Generative AI APIs', 'Scikit-Learn', 'Pandas'],
     verificationStatus: 'verified',
   },
 ];
