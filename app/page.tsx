@@ -5,6 +5,9 @@ import {
   ProjectsSection,
   SkillsSection,
   ExperienceSection,
+  SimulationsSection,
+  AchievementsSection,
+  CertificationsSection,
   ContactSection,
 } from '@/components/sections';
 
@@ -16,6 +19,9 @@ export default function HomePage() {
       <ProjectsSection />
       <SkillsSection />
       <ExperienceSection />
+      <SimulationsSection />
+      <AchievementsSection />
+      <CertificationsSection />
       <ContactSection />
     </div>
   );

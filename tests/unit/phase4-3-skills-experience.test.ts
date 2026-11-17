@@ -1,5 +1,12 @@
 import { describe, it, expect } from 'vitest';
-import { SkillsSection, ExperienceSection, BentoShowcase } from '@/components/sections';
+import {
+  SkillsSection,
+  ExperienceSection,
+  SimulationsSection,
+  AchievementsSection,
+  CertificationsSection,
+  BentoShowcase,
+} from '@/components/sections';
 import {
   technicalSkillsList,
   professionalInternships,
@@ -11,9 +18,12 @@ import {
 } from '@/content';
 
 describe('Phase 4.3 Premium Skills & Experience Showcase Suite', () => {
-  it('exports SkillsSection, ExperienceSection, and BentoShowcase cleanly', () => {
+  it('exports SkillsSection, ExperienceSection, SimulationsSection, AchievementsSection, CertificationsSection cleanly', () => {
     expect(SkillsSection).toBeDefined();
     expect(ExperienceSection).toBeDefined();
+    expect(SimulationsSection).toBeDefined();
+    expect(AchievementsSection).toBeDefined();
+    expect(CertificationsSection).toBeDefined();
     expect(BentoShowcase).toBeDefined();
   });
 

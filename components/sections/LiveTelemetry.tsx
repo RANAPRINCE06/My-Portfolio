@@ -182,9 +182,6 @@ export const LiveTelemetry: React.FC = () => {
         }}
       />
 
-      {/* Anchor for Achievements navigation target */}
-      <div id="achievements" className="absolute top-0 -mt-28" aria-hidden="true" />
-
       {/* Section Header */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
         <div>
