@@ -3,6 +3,8 @@ export { LiveTelemetry } from './LiveTelemetry';
 export { ProjectsSection } from './ProjectsSection';
 export { SkillsSection } from './SkillsSection';
 export { ExperienceSection } from './ExperienceSection';
+export { SimulationsSection } from './SimulationsSection';
+export { AchievementsSection } from './AchievementsSection';
+export { CertificationsSection } from './CertificationsSection';
 export { BentoShowcase } from './BentoShowcase';
 export { ContactSection } from './ContactSection';
-
