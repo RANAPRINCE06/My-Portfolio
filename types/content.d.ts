@@ -109,6 +109,7 @@ export type SkillCategory =
   | 'Backend Development'
   | 'Databases'
   | 'AI / Machine Learning'
+  | 'AI & Machine Learning'
   | 'Cloud & DevOps'
   | 'Developer Tools'
   | 'Core Computer Science';

@@ -3,7 +3,8 @@ import {
   HeroSection,
   LiveTelemetry,
   ProjectsSection,
-  BentoShowcase,
+  SkillsSection,
+  ExperienceSection,
   ContactSection,
 } from '@/components/sections';
 
@@ -13,7 +14,8 @@ export default function HomePage() {
       <HeroSection />
       <LiveTelemetry />
       <ProjectsSection />
-      <BentoShowcase />
+      <SkillsSection />
+      <ExperienceSection />
       <ContactSection />
     </div>
   );

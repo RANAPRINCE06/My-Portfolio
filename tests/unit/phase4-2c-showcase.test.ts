@@ -105,3 +105,4 @@ describe('Phase 4.2C Cinematic Project Showcase Suite', () => {
     expect(backendProjects.some((p) => p.slug === 'scalecart-microservices')).toBe(true);
   });
 });
+
