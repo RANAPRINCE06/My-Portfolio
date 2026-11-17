@@ -12,6 +12,15 @@ export interface CuratedRepoConfig {
 }
 
 export const REPOSITORY_CURATION_MAP: Record<string, CuratedRepoConfig> = {
+  'payrecover-ai': {
+    repoName: 'payrecover-ai',
+    isFeatured: true,
+    isHidden: false,
+    customDescription:
+      'Autonomous revenue recovery engine with multi-agent triage, human-in-the-loop safety guardrails, and deterministic payment failure remediation.',
+    category: 'Distributed Systems & Backend',
+    displayOrder: 1,
+  },
   'ROADWATCH-AI': {
     repoName: 'ROADWATCH-AI',
     isFeatured: true,
@@ -19,7 +28,7 @@ export const REPOSITORY_CURATION_MAP: Record<string, CuratedRepoConfig> = {
     customDescription:
       'AI-powered road safety intelligence platform detecting hazards, predicting risk indices, and accelerating municipal repair workflows with real-time Socket.IO telemetry (IIT Madras CoERS Hackathon).',
     category: 'AI & Machine Learning',
-    displayOrder: 1,
+    displayOrder: 2,
   },
   'ai-resume-analyzer': {
     repoName: 'ai-resume-analyzer',

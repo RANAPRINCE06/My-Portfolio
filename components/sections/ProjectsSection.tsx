@@ -3,14 +3,22 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { projectList } from '@/content';
 import { ProjectCard } from '@/components/ui/ProjectCard';
+import { ProjectModal } from '@/components/ui/ProjectModal';
 import { SplitTextReveal } from '@/components/ui/SplitTextReveal';
 import { gsap } from '@/lib/gsap';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
+import { Project } from '@/types/content';
 
-const CATEGORIES = ['All', 'AI & Machine Learning', 'Full-Stack Web', 'Distributed Systems & Backend'];
+const CATEGORY_TABS = [
+  { id: 'All', label: 'All' },
+  { id: 'AI / Machine Learning', label: 'AI / Machine Learning' },
+  { id: 'Full Stack', label: 'Full Stack' },
+  { id: 'Backend / Systems', label: 'Backend / Systems' },
+];
 
 export const ProjectsSection: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState('All');
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const hasFilterChangedRef = useRef(false);
@@ -18,7 +26,29 @@ export const ProjectsSection: React.FC = () => {
 
   const filteredProjects = projectList.filter((project) => {
     if (activeCategory === 'All') return true;
-    return project.category === activeCategory;
+    if (activeCategory === 'AI / Machine Learning') {
+      return (
+        project.category === 'AI & Machine Learning' ||
+        project.technologies.some((t) =>
+          ['FastAPI', 'Gemini', 'Python', 'Google Gemini AI', 'Sentence-Transformers', 'spaCy'].includes(t)
+        )
+      );
+    }
+    if (activeCategory === 'Full Stack') {
+      return (
+        project.category === 'Full-Stack Web' ||
+        project.technologies.some((t) => ['React', 'Vite', 'Express.js', 'Firebase'].includes(t))
+      );
+    }
+    if (activeCategory === 'Backend / Systems') {
+      return (
+        project.category === 'Distributed Systems & Backend' ||
+        project.technologies.some((t) =>
+          ['FastAPI', 'Node.js', 'Express.js', 'Spring Boot', 'Kafka', 'Redis', 'PostgreSQL'].includes(t)
+        )
+      );
+    }
+    return true;
   });
 
   // Initial ScrollTrigger choreography for Statistics -> Projects transition
@@ -163,20 +193,20 @@ export const ProjectsSection: React.FC = () => {
 
         {/* Category Filters */}
         <div className="flex flex-wrap gap-1.5" role="tablist" aria-label="Project Category Filter">
-          {CATEGORIES.map((cat) => (
+          {CATEGORY_TABS.map((tab) => (
             <button
-              key={cat}
+              key={tab.id}
               role="tab"
-              aria-selected={activeCategory === cat}
+              aria-selected={activeCategory === tab.id}
               type="button"
-              onClick={() => handleCategoryChange(cat)}
+              onClick={() => handleCategoryChange(tab.id)}
               className={`projects-filter-tab rounded-lg px-3 py-1.5 text-xs font-mono transition-all ${
-                activeCategory === cat
+                activeCategory === tab.id
                   ? 'border border-accent-cyan/40 bg-accent-cyan/15 text-accent-cyan font-semibold shadow-sm'
                   : 'border border-border-subtle bg-background-surface/50 text-text-muted hover:text-text-primary hover:border-white/20'
               }`}
             >
-              {cat}
+              {tab.label}
             </button>
           ))}
         </div>
@@ -189,9 +219,17 @@ export const ProjectsSection: React.FC = () => {
             key={project.slug}
             project={project}
             featured={index === 0 && activeCategory === 'All'}
+            onSelect={(p) => setSelectedProject(p)}
           />
         ))}
       </div>
+
+      {/* Deep Dive Architectural Modal */}
+      <ProjectModal
+        project={selectedProject}
+        isOpen={!!selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
     </section>
   );
 };
