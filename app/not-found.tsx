@@ -1,13 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
-import { Terminal, ArrowLeft } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
+import { RoyalPRLogo } from '@/components/ui/RoyalPRLogo';
 
 export default function NotFound() {
   return (
     <div className="flex min-h-[70vh] flex-col items-center justify-center px-6 text-center">
-      <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-accent-cyan/30 bg-accent-cyan/10 text-accent-cyan shadow-[0_0_30px_rgba(0,240,255,0.2)]">
-        <Terminal className="h-8 w-8" />
-      </div>
+      <RoyalPRLogo size={64} variant="standalone" showGlow className="mb-2" />
 
       <div className="mt-6 flex items-center gap-2">
         <span className="h-2 w-2 rounded-full bg-accent-cyan animate-pulse" />
@@ -37,3 +36,4 @@ export default function NotFound() {
     </div>
   );
 }
+
