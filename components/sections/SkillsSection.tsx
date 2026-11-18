@@ -269,7 +269,7 @@ export const SkillsSection: React.FC = () => {
       {/* Section Header */}
       <div>
         <div className="skills-eyebrow flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full bg-accent-cyan" />
+          <span className="h-2 w-2 rounded-full bg-accent-cyan animate-pulse" />
           <span className="font-mono text-xs uppercase tracking-wider text-text-muted">
             ENGINEERING CAPABILITIES &bull; PRODUCTION STACK
           </span>
@@ -356,7 +356,7 @@ export const SkillsSection: React.FC = () => {
         {currentSkills.map((skill) => (
           <div
             key={skill.name}
-            className="skills-grid-item group relative flex flex-col justify-between overflow-hidden rounded-xl border border-border-subtle/80 bg-background-glass/90 p-4 backdrop-blur-xl transition-all duration-300 hover:border-accent-cyan/40 hover:shadow-card-glass"
+            className="skills-grid-item group relative flex flex-col justify-between overflow-hidden rounded-xl border border-border-subtle/80 bg-background-glass/90 p-4 backdrop-blur-xl transition-all duration-300 hover:border-accent-cyan/40 hover:shadow-card-glass hover:-translate-y-1"
           >
             {/* Subtle Top Glowing Line on Hover */}
             <div className="pointer-events-none absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-accent-cyan/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />

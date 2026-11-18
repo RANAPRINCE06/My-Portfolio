@@ -293,9 +293,12 @@ export const ContactSection: React.FC = () => {
                   DISPATCH_TERMINAL.sh
                 </span>
               </div>
-              <div className="flex items-center gap-1.5 font-mono text-[10px] text-accent-cyan">
-                <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan animate-ping" />
-                <span>SECURE SSL</span>
+              <div className="flex items-center gap-3">
+                <div className="flex items-center gap-1.5 font-mono text-[10px] text-accent-cyan">
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent-cyan animate-ping" />
+                  <span>SECURE SSL</span>
+                </div>
+                <RoyalPRLogo size={22} variant="monogram" showGlow={false} />
               </div>
             </div>
 

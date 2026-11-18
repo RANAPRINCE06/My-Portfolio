@@ -83,7 +83,7 @@ export const CertificationsSection: React.FC = () => {
       {/* Section Header */}
       <div>
         <div className="cert-eyebrow flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full bg-emerald-400" />
+          <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
           <span className="font-mono text-xs uppercase tracking-wider text-text-muted">
             ACCREDITATIONS &bull; TECHNICAL PROFICIENCY
           </span>
@@ -137,7 +137,7 @@ export const CertificationsSection: React.FC = () => {
         {filteredCerts.map((cert) => (
           <div
             key={cert.id}
-            className="cert-card group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-border-subtle bg-background-glass/90 p-5 md:p-6 backdrop-blur-xl transition-all duration-300 hover:border-emerald-500/50 hover:shadow-card-glass"
+            className="cert-card group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-border-subtle bg-background-glass/90 p-5 md:p-6 backdrop-blur-xl transition-all duration-300 hover:border-emerald-500/50 hover:shadow-card-glass hover:-translate-y-1"
           >
             <div>
               {/* Card Header: Category & Date */}

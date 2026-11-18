@@ -45,6 +45,18 @@ export const Navbar: React.FC = () => {
     };
   }, []);
 
+  // Keyboard accessibility: dismiss mobile menu on Escape
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [mobileMenuOpen]);
+
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string,
@@ -64,7 +76,7 @@ export const Navbar: React.FC = () => {
       <nav
         aria-label="Main Navigation"
         className={cn(
-          'flex w-full max-w-6xl items-center justify-between rounded-2xl border px-4 sm:px-5 py-2.5 sm:py-3 shadow-card-glass backdrop-blur-xl transition-all duration-300',
+          'relative z-10 flex w-full max-w-6xl items-center justify-between rounded-2xl border px-4 sm:px-5 py-2.5 sm:py-3 shadow-card-glass backdrop-blur-xl transition-all duration-300',
           isScrolled
             ? 'border-border-elevated bg-background-secondary/90'
             : 'border-border-subtle bg-background-glass/85 hover:border-border-elevated'
@@ -160,56 +172,64 @@ export const Navbar: React.FC = () => {
         </button>
       </nav>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer & Backdrop */}
       {mobileMenuOpen && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          className="fixed inset-x-4 top-20 z-modal flex flex-col gap-1.5 rounded-2xl border border-border-elevated bg-background-secondary/95 p-5 shadow-2xl backdrop-blur-2xl lg:hidden max-h-[80vh] overflow-y-auto"
-        >
-          {NAV_LINKS.map((link) => {
-            const isActive = activeHref === link.href;
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={(e) => handleNavClick(e, link.href, true)}
-                className={cn(
-                  'rounded-xl px-4 py-2.5 text-sm font-medium transition-colors',
-                  isActive
-                    ? 'bg-accent-cyan/10 text-accent-cyan font-semibold'
-                    : 'text-text-secondary hover:bg-white/[0.05] hover:text-text-primary'
-                )}
+        <>
+          <div
+            className="fixed inset-0 z-0 bg-black/60 backdrop-blur-sm lg:hidden"
+            onClick={() => setMobileMenuOpen(false)}
+            aria-hidden="true"
+          />
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile Navigation Menu"
+            className="fixed inset-x-4 top-20 z-20 flex flex-col gap-1.5 rounded-2xl border border-border-elevated bg-background-secondary/95 p-5 shadow-2xl backdrop-blur-2xl lg:hidden max-h-[80vh] overflow-y-auto"
+          >
+            {NAV_LINKS.map((link) => {
+              const isActive = activeHref === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={(e) => handleNavClick(e, link.href, true)}
+                  className={cn(
+                    'rounded-xl px-4 py-2.5 text-sm font-medium transition-colors',
+                    isActive
+                      ? 'bg-accent-cyan/10 text-accent-cyan font-semibold'
+                      : 'text-text-secondary hover:bg-white/[0.05] hover:text-text-primary'
+                  )}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+            <div className="mt-2 flex flex-col gap-2 pt-3 border-t border-border-subtle">
+              <Button
+                href="https://github.com/RANAPRINCE06"
+                external
+                variant="outline"
+                size="md"
+                className="w-full font-mono text-xs"
               >
-                {link.label}
-              </Link>
-            );
-          })}
-          <div className="mt-2 flex flex-col gap-2 pt-3 border-t border-border-subtle">
-            <Button
-              href="https://github.com/RANAPRINCE06"
-              external
-              variant="outline"
-              size="md"
-              className="w-full font-mono text-xs"
-            >
-              GitHub Profile
-            </Button>
-            <Button
-              href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
-                setMobileMenuOpen(false);
-                scrollToTarget('#contact', { offset: -96 });
-              }}
-              variant="primary"
-              size="md"
-              className="w-full font-mono text-xs"
-            >
-              Get In Touch
-            </Button>
+                GitHub Profile
+              </Button>
+              <Button
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setMobileMenuOpen(false);
+                  scrollToTarget('#contact', { offset: -96 });
+                }}
+                variant="primary"
+                size="md"
+                className="w-full font-mono text-xs"
+              >
+                Get In Touch
+              </Button>
+            </div>
           </div>
-        </div>
+        </>
       )}
     </header>
   );

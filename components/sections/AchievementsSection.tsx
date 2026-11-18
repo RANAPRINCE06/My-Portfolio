@@ -99,7 +99,7 @@ export const AchievementsSection: React.FC = () => {
       {/* Section Header */}
       <div>
         <div className="ach-eyebrow flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full bg-amber-400" />
+          <span className="h-2 w-2 rounded-full bg-amber-400 animate-pulse" />
           <span className="font-mono text-xs uppercase tracking-wider text-text-muted">
             ALGORITHMIC DEPTH &bull; CONTEST STANDINGS
           </span>
@@ -119,7 +119,7 @@ export const AchievementsSection: React.FC = () => {
       <div className="ach-telemetry-grid grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {/* Codeforces */}
         {cf && (
-          <div className="ach-telemetry-card group rounded-2xl border border-border-subtle bg-background-glass/90 p-5 backdrop-blur-xl transition-all duration-300 hover:border-accent-cyan/50 hover:shadow-card-glass">
+          <div className="ach-telemetry-card group rounded-2xl border border-border-subtle bg-background-glass/90 p-5 backdrop-blur-xl transition-all duration-300 hover:border-accent-cyan/50 hover:shadow-card-glass hover:-translate-y-1">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className="flex h-7 w-7 items-center justify-center rounded-lg border border-accent-cyan/30 bg-accent-cyan/10 text-accent-cyan">
@@ -154,7 +154,7 @@ export const AchievementsSection: React.FC = () => {
 
         {/* CodeChef */}
         {cc && (
-          <div className="ach-telemetry-card group rounded-2xl border border-border-subtle bg-background-glass/90 p-5 backdrop-blur-xl transition-all duration-300 hover:border-amber-400/50 hover:shadow-card-glass">
+          <div className="ach-telemetry-card group rounded-2xl border border-border-subtle bg-background-glass/90 p-5 backdrop-blur-xl transition-all duration-300 hover:border-amber-400/50 hover:shadow-card-glass hover:-translate-y-1">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className="flex h-7 w-7 items-center justify-center rounded-lg border border-amber-400/30 bg-amber-400/10 text-amber-400">
@@ -189,7 +189,7 @@ export const AchievementsSection: React.FC = () => {
 
         {/* LeetCode */}
         {lc && (
-          <div className="ach-telemetry-card group rounded-2xl border border-border-subtle bg-background-glass/90 p-5 backdrop-blur-xl transition-all duration-300 hover:border-emerald-400/50 hover:shadow-card-glass">
+          <div className="ach-telemetry-card group rounded-2xl border border-border-subtle bg-background-glass/90 p-5 backdrop-blur-xl transition-all duration-300 hover:border-emerald-400/50 hover:shadow-card-glass hover:-translate-y-1">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className="flex h-7 w-7 items-center justify-center rounded-lg border border-emerald-400/30 bg-emerald-400/10 text-emerald-400">
@@ -224,7 +224,7 @@ export const AchievementsSection: React.FC = () => {
 
         {/* HackerRank */}
         {hr && (
-          <div className="ach-telemetry-card group rounded-2xl border border-border-subtle bg-background-glass/90 p-5 backdrop-blur-xl transition-all duration-300 hover:border-accent-violet/50 hover:shadow-card-glass">
+          <div className="ach-telemetry-card group rounded-2xl border border-border-subtle bg-background-glass/90 p-5 backdrop-blur-xl transition-all duration-300 hover:border-accent-violet/50 hover:shadow-card-glass hover:-translate-y-1">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className="flex h-7 w-7 items-center justify-center rounded-lg border border-accent-violet/30 bg-accent-violet/10 text-accent-violet">
@@ -269,7 +269,7 @@ export const AchievementsSection: React.FC = () => {
           {achievementList.map((ach) => (
             <div
               key={ach.id}
-              className="ach-honor-card group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-border-subtle bg-background-glass/90 p-5 md:p-6 backdrop-blur-xl transition-all duration-300 hover:border-amber-400/50 hover:shadow-card-glass"
+              className="ach-honor-card group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-border-subtle bg-background-glass/90 p-5 md:p-6 backdrop-blur-xl transition-all duration-300 hover:border-amber-400/50 hover:shadow-card-glass hover:-translate-y-1"
             >
               <div>
                 <div className="flex items-center justify-between border-b border-border-subtle/70 pb-2.5">

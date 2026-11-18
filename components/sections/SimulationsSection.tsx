@@ -76,7 +76,7 @@ export const SimulationsSection: React.FC = () => {
       {/* Section Header */}
       <div>
         <div className="sim-eyebrow flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full bg-accent-violet" />
+          <span className="h-2 w-2 rounded-full bg-accent-violet animate-pulse" />
           <span className="font-mono text-xs uppercase tracking-wider text-text-muted">
             VIRTUAL EXPERIENCE &bull; ENTERPRISE SIMULATIONS
           </span>
@@ -109,7 +109,7 @@ export const SimulationsSection: React.FC = () => {
         {virtualJobSimulations.map((sim) => (
           <div
             key={sim.id}
-            className="sim-card group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-border-subtle bg-background-glass/90 p-5 md:p-6 backdrop-blur-xl transition-all duration-300 hover:border-accent-violet/50 hover:shadow-card-glass"
+            className="sim-card group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-border-subtle bg-background-glass/90 p-5 md:p-6 backdrop-blur-xl transition-all duration-300 hover:border-accent-violet/50 hover:shadow-card-glass hover:-translate-y-1"
           >
             <div>
               {/* Header: Organization and Date */}

@@ -7,7 +7,7 @@ import { useActiveSection } from '@/hooks/useActiveSection';
 import { cn } from '@/lib/utils';
 
 const SECTIONS = [
-  { id: 'hero', label: '01 · Core', href: '#hero' },
+  { id: 'hero', label: '01 · Core', href: '#about' },
   { id: 'statistics', label: '02 · Telemetry', href: '#statistics' },
   { id: 'projects', label: '03 · Systems', href: '#projects' },
   { id: 'skills', label: '04 · Matrix', href: '#skills' },

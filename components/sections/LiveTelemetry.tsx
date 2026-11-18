@@ -186,7 +186,7 @@ export const LiveTelemetry: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
         <div>
           <div className="telemetry-label flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-accent-cyan" />
+            <span className="h-2 w-2 rounded-full bg-accent-cyan animate-pulse" />
             <span className="font-mono text-xs uppercase tracking-wider text-text-muted">
               METRICS &amp; PLATFORM DATA
             </span>
@@ -194,8 +194,11 @@ export const LiveTelemetry: React.FC = () => {
           <SplitTextReveal
             text="Algorithmic Standing & Open Source"
             as="h2"
-            className="mt-2 font-display text-2xl font-bold tracking-tight text-text-primary sm:text-3xl"
+            className="mt-2 font-display text-3xl font-bold tracking-tight text-text-primary sm:text-4xl"
           />
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-text-secondary">
+            Continuous telemetry streaming live competitive programming ratings, GitHub repositories, and algorithmic milestones.
+          </p>
         </div>
         <div className="telemetry-label flex items-center gap-2 text-xs font-mono text-text-muted">
           <CheckCircle2 className="h-3.5 w-3.5 text-accent-emerald" />

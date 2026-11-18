@@ -94,7 +94,7 @@ export const ExperienceSection: React.FC = () => {
       {/* Section Header */}
       <div>
         <div className="exp-eyebrow flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full bg-accent-cyan" />
+          <span className="h-2 w-2 rounded-full bg-accent-cyan animate-pulse" />
           <span className="font-mono text-xs uppercase tracking-wider text-text-muted">
             CAREER &amp; INDUSTRY &bull; VERIFIED TIMELINE
           </span>
@@ -125,7 +125,7 @@ export const ExperienceSection: React.FC = () => {
           {professionalInternships.map((internship) => (
             <div
               key={internship.id}
-              className="exp-timeline-item relative group flex flex-col justify-between overflow-hidden rounded-2xl border border-border-subtle bg-background-glass/90 p-6 md:p-8 backdrop-blur-xl transition-all duration-300 hover:border-accent-cyan/40 hover:shadow-card-glass"
+              className="exp-timeline-item relative group flex flex-col justify-between overflow-hidden rounded-2xl border border-border-subtle bg-background-glass/90 p-6 md:p-8 backdrop-blur-xl transition-all duration-300 hover:border-accent-cyan/40 hover:shadow-card-glass hover:-translate-y-1"
             >
               {/* Timeline Node Reticle Indicator */}
               <div

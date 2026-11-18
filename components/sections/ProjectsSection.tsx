@@ -1,13 +1,18 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
+import dynamic from 'next/dynamic';
 import { projectList } from '@/content';
 import { ProjectCard } from '@/components/ui/ProjectCard';
-import { ProjectModal } from '@/components/ui/ProjectModal';
 import { SplitTextReveal } from '@/components/ui/SplitTextReveal';
 import { gsap } from '@/lib/gsap';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { Project } from '@/types/content';
+
+const ProjectModal = dynamic(
+  () => import('@/components/ui/ProjectModal').then((mod) => mod.ProjectModal),
+  { ssr: false }
+);
 
 const CATEGORY_TABS = [
   { id: 'All', label: 'All' },
@@ -179,7 +184,7 @@ export const ProjectsSection: React.FC = () => {
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
         <div>
           <div className="projects-eyebrow flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-accent-cyan" />
+            <span className="h-2 w-2 rounded-full bg-accent-cyan animate-pulse" />
             <span className="font-mono text-xs uppercase tracking-wider text-text-muted">
               CURATED PRODUCTION &amp; RESEARCH ARCHITECTURES
             </span>
@@ -189,6 +194,9 @@ export const ProjectsSection: React.FC = () => {
             as="h2"
             className="mt-2 font-display text-3xl font-bold tracking-tight text-text-primary sm:text-4xl"
           />
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-text-secondary">
+            Production-grade fullstack web applications, distributed systems, and AI agent architectures with comprehensive telemetry.
+          </p>
         </div>
 
         {/* Category Filters */}
