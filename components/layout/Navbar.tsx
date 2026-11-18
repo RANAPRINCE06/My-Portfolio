@@ -2,7 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Menu, X, Terminal } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import { RoyalPRLogo } from '@/components/ui/RoyalPRLogo';
 import { Button } from '@/components/ui/Button';
 import { MagneticWrapper } from '@/components/ui/MagneticWrapper';
 import { scrollToTarget } from '@/lib/scroll-bridge';
@@ -81,9 +82,7 @@ export const Navbar: React.FC = () => {
           }}
           className="group flex items-center gap-2.5 text-text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-cyan rounded-lg px-1.5 py-1"
         >
-          <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-xl border border-accent-cyan/30 bg-accent-cyan/10 text-accent-cyan transition-transform group-hover:scale-105">
-            <Terminal className="h-4 w-4" />
-          </div>
+          <RoyalPRLogo size={34} variant="navbar" className="transition-transform group-hover:scale-110" />
           <div className="flex flex-col">
             <span className="font-display text-xs sm:text-sm font-bold tracking-tight">PRINCE RANA</span>
             <span className="font-mono text-[9px] sm:text-[10px] tracking-wider text-accent-cyan uppercase">

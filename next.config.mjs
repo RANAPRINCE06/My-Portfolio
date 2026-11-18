@@ -15,6 +15,20 @@ const nextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      { source: '/about', destination: '/#about', permanent: false },
+      { source: '/statistics', destination: '/#statistics', permanent: false },
+      { source: '/telemetry', destination: '/#statistics', permanent: false },
+      { source: '/projects', destination: '/#projects', permanent: false },
+      { source: '/skills', destination: '/#skills', permanent: false },
+      { source: '/experience', destination: '/#experience', permanent: false },
+      { source: '/simulations', destination: '/#simulations', permanent: false },
+      { source: '/achievements', destination: '/#achievements', permanent: false },
+      { source: '/certifications', destination: '/#certifications', permanent: false },
+      { source: '/contact', destination: '/#contact', permanent: false },
+    ];
+  },
   async headers() {
     return [
       {
