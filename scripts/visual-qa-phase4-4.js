@@ -106,8 +106,8 @@ async function runPhase44QA() {
       console.log('  Auditing Royal PR Monogram in Navbar...');
       const navbarLogo = page.locator('nav a[href="/"]').first();
       await expectCount(navbarLogo, 1, 'Navbar Royal PR link');
-      const navbarSvg = navbarLogo.locator('svg');
-      await expectCount(navbarSvg, 1, 'Navbar Royal PR SVG monogram');
+      const navbarVisual = navbarLogo.locator('img, svg').first();
+      await expectCount(navbarVisual, 1, 'Navbar Royal PR visual monogram');
       console.log('    ✓ Royal PR logo loaded in Navbar');
 
       // Screenshot logo closeup
@@ -191,7 +191,7 @@ async function runPhase44QA() {
       await page.waitForTimeout(800);
 
       // Check Royal PR Logo in Footer
-      const footerLogo = footer.locator('svg').first();
+      const footerLogo = footer.locator('img, svg').first();
       await expectCount(footerLogo, 1, 'Footer Royal PR monogram');
 
       // Check 9 Navigation links
