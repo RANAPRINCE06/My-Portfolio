@@ -60,24 +60,41 @@ export const metadata: Metadata = {
     description:
       'High-performance full-stack engineering, algorithmic problem solving, and intelligent systems.',
     siteName: 'Prince Rana Portfolio',
+    images: [
+      {
+        url: '/images/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Prince Rana - Software Development & Artificial Intelligence Portfolio',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Prince Rana | Software Engineer & AI',
     description:
       'Software Development Engineer specializing in full-stack systems and artificial intelligence.',
+    creator: '@RANAPRINCE06',
+    images: ['/images/og-image.png'],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
   icons: {
     icon: [
-      { url: '/icon.png', type: 'image/png' },
+      { url: '/icon.png', sizes: '256x256', type: 'image/png' },
       { url: '/icon.svg', type: 'image/svg+xml' },
     ],
     shortcut: '/icon.png',
-    apple: '/icon.png',
+    apple: '/apple-icon.png',
   },
 };
 
@@ -92,11 +109,19 @@ export default function RootLayout({
     name: 'Prince Rana',
     jobTitle: 'Software Development Engineer',
     url: env.NEXT_PUBLIC_SITE_URL,
+    image: `${env.NEXT_PUBLIC_SITE_URL}/images/og-image.png`,
     sameAs: [
       'https://github.com/RANAPRINCE06',
       'https://www.linkedin.com/in/prince-rana-0b622b32a',
       'https://codeforces.com/profile/rana_prince.1806',
       'https://leetcode.com/u/RANA_PRINCE_06/',
+    ],
+    knowsAbout: [
+      'Full-Stack Architecture',
+      'Artificial Intelligence & Natural Language Processing',
+      'Algorithmic Problem Solving & Data Structures',
+      'Three.js & Interactive Computer Graphics',
+      'Distributed Systems & Cloud Computing',
     ],
   };
 

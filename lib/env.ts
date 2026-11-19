@@ -12,8 +12,12 @@ const envSchema = z.object({
 export type Env = z.infer<typeof envSchema>;
 
 export function getValidatedEnv(): Env {
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://ranaprince.dev');
+
   const parsed = envSchema.safeParse({
-    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
+    NEXT_PUBLIC_SITE_URL: siteUrl,
     RESEND_API_KEY: process.env.RESEND_API_KEY,
     CONTACT_EMAIL_RECIPIENT: process.env.CONTACT_EMAIL_RECIPIENT,
     GITHUB_ACCESS_TOKEN: process.env.GITHUB_ACCESS_TOKEN,
